@@ -22,7 +22,7 @@ export default async function AccountCard({
   return (
     <Card key={address} className={`${className} max-w-[400px]`}>
       <CardHeader className="flex gap-3">
-        <Avatar name={name} />
+        <Avatar name={name} color="secondary" />
         <div className="flex flex-col">
           <p className="text-md">{name}</p>
           <p className="text-xs text-default-500">{address}</p>
