@@ -1,4 +1,5 @@
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react";
+import AddWalletModal from "./AddWalletModal";
 
 export default function NavBar({}: Readonly<{
 
@@ -10,9 +11,11 @@ export default function NavBar({}: Readonly<{
       </NavbarBrand>
       <NavbarContent justify="end">
         <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
+          <AddWalletModal />
+
+          {/* <Button as={Link} color="primary" href="#" variant="flat">
             Add wallet to watch
-          </Button>
+          </Button> */}
         </NavbarItem>
       </NavbarContent>
     </Navbar>
