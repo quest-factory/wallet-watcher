@@ -1,23 +1,32 @@
-'use client'
+'use client';
 
-import React from "react";
-import {Modal, ModalContent, ModalHeader, ModalBody, useDisclosure, ModalFooter, Button, Checkbox, Input, Link} from "@nextui-org/react";
+import React from 'react';
+import {
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  useDisclosure,
+  ModalFooter,
+  Button,
+  Input,
+} from '@nextui-org/react';
 
 export default function AddWalletModal() {
-  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
     <>
-      <Button onPress={onOpen} color="primary">Add wallet to watch</Button>
-      <Modal 
-        isOpen={isOpen} 
-        onOpenChange={onOpenChange}
-        placement="top-center"
-      >
+      <Button onPress={onOpen} color="secondary">
+        Add wallet to watch
+      </Button>
+      <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Add new wallet</ModalHeader>
+              <ModalHeader className="flex flex-col gap-1">
+                Add new wallet
+              </ModalHeader>
               <ModalBody>
                 <Input
                   autoFocus
@@ -33,7 +42,7 @@ export default function AddWalletModal() {
                 />
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="flat" onPress={onClose}>
+                <Button color="default" variant="flat" onPress={onClose}>
                   Close
                 </Button>
                 <Button color="primary" onPress={onClose}>
