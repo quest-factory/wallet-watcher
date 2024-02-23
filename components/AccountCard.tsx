@@ -1,12 +1,5 @@
 import { getBalance } from '@/lib/infura';
-import {
-  Avatar,
-  Card,
-  CardBody,
-  CardHeader,
-  Divider,
-  Image,
-} from '@nextui-org/react';
+import { Avatar, Card, CardBody, CardHeader, Divider } from '@nextui-org/react';
 
 export default async function AccountCard({
   className = '',
