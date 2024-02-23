@@ -8,7 +8,7 @@ export default async function Home() {
   ];
 
   return (
-    <main className="w-full mx-auto max-w-[80%]">
+    <main className="w-full mx-auto max-w-[80%] mt-10">
       <section className="space-y-12">
         <h1>Accounts</h1>
 
