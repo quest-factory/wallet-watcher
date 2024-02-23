@@ -1,5 +1,8 @@
+import { getQuotes } from '@/lib/coin_market';
 import { getBalance } from '@/lib/infura';
+import { getCurrencyValue } from '@/lib/utils';
 import { Avatar, Card, CardBody, CardHeader, Divider } from '@nextui-org/react';
+import EthereumIcon from './icons/EthereumIcon';
 
 export default async function AccountCard({
   className = '',
@@ -10,7 +13,18 @@ export default async function AccountCard({
   name: string;
   address: string;
 }) {
-  const balance = await getBalance(address);
+  const [
+    {
+      data: { ETH },
+    },
+    balance,
+  ] = await Promise.all([getQuotes('ETH'), getBalance(address)]);
+
+  const {
+    quote: {
+      USD: { price },
+    },
+  } = ETH[0];
 
   return (
     <Card key={address} className={`${className} max-w-[400px]`}>
@@ -25,7 +39,12 @@ export default async function AccountCard({
       <Divider />
 
       <CardBody>
-        <p>{balance} ETH</p>
+        {balance && (
+          <span className="flex items-center gap-1">
+            <EthereumIcon className="h-5 w-5" />
+            {balance} ({getCurrencyValue(price * balance)})
+          </span>
+        )}
       </CardBody>
     </Card>
   );
