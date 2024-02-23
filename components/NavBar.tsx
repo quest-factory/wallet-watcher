@@ -1,13 +1,18 @@
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react";
-import AddWalletModal from "./AddWalletModal";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Link,
+  Button,
+} from '@nextui-org/react';
+import AddWalletModal from './AddWalletModal';
 
-export default function NavBar({}: Readonly<{
-
-}>) {
+export default function NavBar({}: Readonly<{}>) {
   return (
     <Navbar className="shadow-lg">
       <NavbarBrand>
-      <Link href="#">WALLET WATCHER</Link>
+        <Link href="#">WALLET WATCHER</Link>
       </NavbarBrand>
       <NavbarContent justify="end">
         <NavbarItem>
