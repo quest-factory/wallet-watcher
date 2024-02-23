@@ -12,7 +12,7 @@ export default async function Home() {
       <section className="space-y-12">
         <h1>Accounts</h1>
 
-        <div className="grid grid-cols-3">
+        <div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-3">
           {ACCOUNTS.sort().map((account) => (
             <AccountCard
               key={account.address}
