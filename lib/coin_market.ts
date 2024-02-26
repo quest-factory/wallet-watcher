@@ -11,7 +11,7 @@ export async function getQuotes(symbol: 'ETH') {
 
   const response = await fetch(
     `https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?${params.toString()}`,
-    { headers: coinMarketHeaders, next: { revalidate: 3600 } }
+    { headers: coinMarketHeaders, next: { revalidate: 600 } }
   );
   const data = (await response.json()) as Promise<QuotesRequest<typeof symbol>>;
 
