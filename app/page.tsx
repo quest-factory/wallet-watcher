@@ -1,6 +1,6 @@
 'use client';
 
-import AccountCard from '@/components/AccountCard';
+import AccountCard, { AccountCardSkeleton } from '@/components/AccountCard';
 import useLocalStorage from '@/lib/useLocalStorage';
 import { Suspense } from 'react';
 
@@ -14,8 +14,15 @@ export default function Home() {
 
         <div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-3">
           {walletsLocal.sort().map((account, index) => (
-            <Suspense key={index} fallback={'loading...'}>
-              <AccountCard key={index} className="mx-auto" {...account} />
+            <Suspense
+              key={index}
+              fallback={<AccountCardSkeleton className="mx-auto" />}
+            >
+              <AccountCard
+                key={account.address}
+                className="mx-auto"
+                {...account}
+              />
             </Suspense>
           ))}
         </div>
