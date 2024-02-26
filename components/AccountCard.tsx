@@ -38,12 +38,10 @@ export default function AccountCard({
       <Divider />
 
       <CardBody>
-        {balance && (
-          <span className="flex items-center gap-1">
-            <EthereumIcon className="h-5 w-5" />
-            {balance} ({getCurrencyValue(price * balance)})
-          </span>
-        )}
+        <span className="flex items-center gap-1">
+          <EthereumIcon className="h-5 w-5" />
+          {balance} ({getCurrencyValue(price * balance)})
+        </span>
       </CardBody>
     </Card>
   );
