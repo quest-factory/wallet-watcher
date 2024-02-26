@@ -14,18 +14,18 @@ export default function AccountCard({
   name: string;
   address: string;
 }) {
-  const [
-    {
-      data: { ETH },
-    },
-    balance,
-  ] = await Promise.all([getQuotes('ETH'), getBalance(address)]);
+  // const [
+  //   {
+  //     data: { ETH },
+  //   },
+  //   balance,
+  // ] = await Promise.all([getQuotes('ETH'), getBalance(address)]);
 
-  const {
-    quote: {
-      USD: { price },
-    },
-  } = ETH[0];
+  // const {
+  //   quote: {
+  //     USD: { price },
+  //   },
+  // } = ETH[0];
 
   return (
     <Card key={address} className={`${className} max-w-[400px]`}>
@@ -40,12 +40,13 @@ export default function AccountCard({
       <Divider />
 
       <CardBody>
-        {balance && (
+        {/* {balance && (
           <span className="flex items-center gap-1">
             <EthereumIcon className="h-5 w-5" />
             {balance} ({getCurrencyValue(price * balance)})
           </span>
-        )}
+        )} */}
+        XX Eth
       </CardBody>
     </Card>
   );
