@@ -1,7 +1,8 @@
 import { getBalance } from '@/lib/infura';
 import { Avatar, Card, CardBody, CardHeader, Divider } from '@nextui-org/react';
 
-export default async function AccountCard({
+// export default async function AccountCard({
+export default function AccountCard({
   className = '',
   name,
   address,
@@ -10,7 +11,7 @@ export default async function AccountCard({
   name: string;
   address: string;
 }) {
-  const balance = await getBalance(address);
+  // const balance = await getBalance(address);
 
   return (
     <Card key={address} className={`${className} max-w-[400px]`}>
@@ -25,7 +26,9 @@ export default async function AccountCard({
       <Divider />
 
       <CardBody>
-        <p>{balance} ETH</p>
+        {/* <p>{balance} ETH</p> */}
+
+        <p>XX Eth</p>
       </CardBody>
     </Card>
   );
