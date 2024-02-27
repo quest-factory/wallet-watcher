@@ -1,5 +1,11 @@
 'use client';
 
+import EthereumIcon from '@/components/icons/EthereumIcon';
+import {
+  reduceWalletAddress,
+  strWeiToStrEth,
+  timeStampToDate,
+} from '@/lib/utils';
 import {
   Table,
   TableHeader,
@@ -7,6 +13,8 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  Spinner,
+  Snippet,
 } from '@nextui-org/react';
 
 import useSWR from 'swr';
@@ -28,36 +36,87 @@ export default function WalletDetails({
 
   return (
     <main className="w-full mx-auto max-w-[80%] mt-10">
-      <section className="space-y-12">
-        <h1>Wallet details</h1>
+      <section className="space-y-12 flex flex-col items-center">
+        <h2>Wallet details</h2>
 
-        <div className="flex flex-col gap-5">
-          <p>Address : {params.address}</p>
-          <p>Balance : {balance}</p>
+        <div className="flex w-full justify-center gap-5">
+          <div className="flex flex-col justify-items-center w-full text-center">
+            <p className="font-bold">Address</p>
+            <Snippet
+              hideSymbol
+              variant="bordered"
+              className="bg-white text-gray-600 h-12"
+            >
+              {params.address}
+            </Snippet>
+          </div>
+          <div className="flex flex-col justify-items-center w-full text-center">
+            <p className="font-bold">Balance</p>
+            <Snippet
+              hideSymbol
+              hideCopyButton
+              variant="bordered"
+              className="bg-white h-12"
+            >
+              <div className="flex justify-center items-center gap-1 text-gray-600">
+                <EthereumIcon className="h-4 w-4" />
+                {balance}
+              </div>
+            </Snippet>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-3 w-full">
           {transactions ? (
-            <Table aria-label="Example static collection table">
-              <TableHeader>
-                <TableColumn>#</TableColumn>
-                <TableColumn>FROM</TableColumn>
-                <TableColumn>TO</TableColumn>
-                <TableColumn>VALUE</TableColumn>
-              </TableHeader>
-              <TableBody>
-                {transactions.result.map((elem: any, index: any) => (
-                  <TableRow key={index}>
-                    <TableCell>{index + 1}</TableCell>
-                    <TableCell>{elem.from}</TableCell>
-                    <TableCell>{elem.to}</TableCell>
-                    <TableCell>{elem.value}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            <>
+              {transactions.result.length > 0 ? (
+                <>
+                  <p className="font-bold w-full text-center">
+                    Latest transactions
+                  </p>
+                  <Table aria-label="Example static collection table w-full">
+                    <TableHeader>
+                      <TableColumn>#</TableColumn>
+                      <TableColumn>DATE</TableColumn>
+                      <TableColumn>FROM</TableColumn>
+                      <TableColumn>TO</TableColumn>
+                      <TableColumn>VALUE</TableColumn>
+                    </TableHeader>
+                    <TableBody>
+                      {transactions.result
+                        .sort(
+                          (a: any, b: any) =>
+                            parseInt(b.timeStamp) - parseInt(a.timeStamp)
+                        )
+                        .map((elem: any, index: any) => (
+                          <TableRow key={index}>
+                            <TableCell>{index + 1}</TableCell>
+                            <TableCell>
+                              {timeStampToDate(elem.timeStamp)}
+                            </TableCell>
+                            <TableCell>
+                              {reduceWalletAddress(elem.from)}
+                            </TableCell>
+                            <TableCell>
+                              {reduceWalletAddress(elem.to)}
+                            </TableCell>
+                            <TableCell>
+                              <div className="flex justify-start items-center gap-1">
+                                <EthereumIcon className="h-4 w-4" />
+                                {strWeiToStrEth(elem.value)}
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                    </TableBody>
+                  </Table>
+                </>
+              ) : (
+                <div>No transactions for this address</div>
+              )}
+            </>
           ) : (
-            <div>Loading</div>
+            <Spinner label="Loading transactions" color="secondary" />
           )}
         </div>
       </section>
