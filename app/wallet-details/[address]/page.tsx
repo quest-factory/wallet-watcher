@@ -112,7 +112,9 @@ export default function WalletDetails({
                   </Table>
                 </>
               ) : (
-                <div>No transactions for this address</div>
+                <div className="text-center text-gray-600">
+                  No transactions for this address
+                </div>
               )}
             </>
           ) : (
