@@ -54,7 +54,7 @@ export default function AccountCard({
 
       <CardBody>
         <span className="flex items-center gap-1">
-          <EthereumIcon className="h-5 w-5" />
+          <EthereumIcon className="h-4 w-4" />
           {balance} ({getCurrencyValue(price * balance)})
         </span>
       </CardBody>
