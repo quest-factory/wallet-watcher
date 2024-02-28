@@ -9,6 +9,35 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      addresses: {
+        Row: {
+          address: string | null;
+          id: number;
+          name: string | null;
+          user_id: string | null;
+        };
+        Insert: {
+          address?: string | null;
+          id?: number;
+          name?: string | null;
+          user_id?: string | null;
+        };
+        Update: {
+          address?: string | null;
+          id?: number;
+          name?: string | null;
+          user_id?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'public_addresses_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       users: {
         Row: {
           email: string | null;

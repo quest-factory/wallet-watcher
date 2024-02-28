@@ -6,6 +6,7 @@ import useLocalStorage from '@/lib/useLocalStorage';
 
 export default function AccountList() {
   const { walletsLocal } = useLocalStorage();
+
   return (
     <section className="space-y-12 flex flex-col items-center">
       <h2>Accounts</h2>

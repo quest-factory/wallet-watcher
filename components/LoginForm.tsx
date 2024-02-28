@@ -11,7 +11,7 @@ export default function LoginForm({ className = '' }: { className?: string }) {
   return (
     <Card className={`${className} max-w-[450px] p-5`}>
       <CardHeader className="flex gap-3">
-        <h2 className="text-md">Login</h2>
+        <h2 className="text-md">Welcome</h2>
       </CardHeader>
       <Divider />
       <CardBody>
