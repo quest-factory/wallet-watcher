@@ -40,14 +40,12 @@ export default function AddWalletModal() {
               <ModalBody>
                 <Input
                   autoFocus
-                  label="Name"
-                  placeholder="John's first wallet"
+                  label="Wallet name"
                   variant="bordered"
                   onChange={(e) => setWalletName(e.target.value)}
                 />
                 <Input
-                  label="Address"
-                  placeholder="0xabc...xyz"
+                  label="Wallet address"
                   variant="bordered"
                   onChange={(e) => setWalletAddress(e.target.value)}
                 />
@@ -57,7 +55,7 @@ export default function AddWalletModal() {
                   Close
                 </Button>
                 <Button
-                  color="primary"
+                  color="secondary"
                   isDisabled={!walletAddress || !walletName}
                   onPress={() => onSubmit(onClose)}
                 >

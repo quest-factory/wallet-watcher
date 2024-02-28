@@ -9,6 +9,7 @@ import {
 import EthereumIcon from './icons/EthereumIcon';
 import useSWR from 'swr';
 import { getCurrencyValue } from '@/lib/utils';
+import { useRouter } from 'next/navigation';
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
@@ -21,6 +22,7 @@ export default function AccountCard({
   name: string;
   address: string;
 }) {
+  const router = useRouter();
   const { data: balance } = useSWR(`/api/balance/${address}`, fetcher);
   const {
     data: { data: quotes },
@@ -33,11 +35,17 @@ export default function AccountCard({
   } = quotes.ETH[0];
 
   return (
-    <Card className={`${className} max-w-[400px]`}>
+    <Card
+      className={`${className} max-w-[400px]`}
+      isPressable
+      onPress={() => {
+        router.push(`/wallet-details/${address}`);
+      }}
+    >
       <CardHeader className="flex gap-3">
         <Avatar name={name} color="secondary" />
         <div className="flex flex-col">
-          <p className="text-md">{name}</p>
+          <p className="text-md text-left">{name}</p>
           <p className="text-xs text-default-500">{address}</p>
         </div>
       </CardHeader>
@@ -46,7 +54,7 @@ export default function AccountCard({
 
       <CardBody>
         <span className="flex items-center gap-1">
-          <EthereumIcon className="h-5 w-5" />
+          <EthereumIcon className="h-4 w-4" />
           {balance} ({getCurrencyValue(price * balance)})
         </span>
       </CardBody>
