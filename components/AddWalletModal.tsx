@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import {
   Modal,
   ModalContent,
@@ -11,61 +10,60 @@ import {
   Button,
   Input,
 } from '@nextui-org/react';
-import useLocalStorage from '@/lib/useLocalStorage';
+import { addAddressesSubmit } from '@/actions/addresses';
+import { useFormState, useFormStatus } from 'react-dom';
+import { useEffect } from 'react';
 
 export default function AddWalletModal() {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [walletName, setWalletName] = useState('');
-  const [walletAddress, setWalletAddress] = useState('');
-  const { writeWalletLocal } = useLocalStorage();
+  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  const [state, formAction] = useFormState(addAddressesSubmit, { message: '' });
 
-  const onSubmit = (onClose: () => void) => {
-    writeWalletLocal(walletName, walletAddress);
-    location.reload();
-    onClose();
-  };
+  useEffect(() => {
+    if (state?.message === 'Created' && isOpen) {
+      onClose();
+    }
+  }, [state?.message]);
 
   return (
     <>
       <Button onPress={onOpen} color="secondary">
         Add wallet to watch
       </Button>
+
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
         <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-col gap-1">
-                Add new wallet
-              </ModalHeader>
-              <ModalBody>
-                <Input
-                  autoFocus
-                  label="Wallet name"
-                  variant="bordered"
-                  onChange={(e) => setWalletName(e.target.value)}
-                />
-                <Input
-                  label="Wallet address"
-                  variant="bordered"
-                  onChange={(e) => setWalletAddress(e.target.value)}
-                />
-              </ModalBody>
-              <ModalFooter>
-                <Button color="default" variant="flat" onPress={onClose}>
-                  Close
-                </Button>
-                <Button
-                  color="secondary"
-                  isDisabled={!walletAddress || !walletName}
-                  onPress={() => onSubmit(onClose)}
-                >
-                  Add
-                </Button>
-              </ModalFooter>
-            </>
-          )}
+          <form action={formAction}>
+            <ModalHeader className="flex flex-col gap-1">
+              Add new wallet
+            </ModalHeader>
+
+            <ModalBody>
+              <Input
+                autoFocus
+                label="Wallet name"
+                name="name"
+                variant="bordered"
+              />
+              <Input label="Wallet address" variant="bordered" name="address" />
+            </ModalBody>
+            <ModalFooter>
+              <Button color="default" variant="flat" onPress={onClose}>
+                Close
+              </Button>
+              <Submit />
+            </ModalFooter>
+          </form>
         </ModalContent>
       </Modal>
     </>
+  );
+}
+
+function Submit() {
+  const { pending } = useFormStatus();
+  return (
+    <Button color="secondary" type="submit" disabled={pending}>
+      {pending ? 'Adding...' : 'Add'}
+    </Button>
   );
 }
