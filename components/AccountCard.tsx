@@ -60,10 +60,11 @@ export default function AccountCard({
               variant="flat"
               size="sm"
               isIconOnly
-              className="bg-white mt-[-16px] mr-[-12px] opacity-0 group-hover:opacity-100"
+              className="bg-white -mt-4 -mr-3 opacity-0 group-hover:opacity-100"
               onPress={() => removeAddresses(id)}
+              title="Remove account"
             >
-              <RemoveIcon className="w-4 h-4" />
+              <RemoveIcon className="size-4 opacity-60 hover:opacity-100" />
             </Button>
           </div>
           <p className="text-xs text-default-500">{address}</p>
