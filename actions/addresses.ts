@@ -65,3 +65,30 @@ export async function addAddressesSubmit(_: any, formData: FormData) {
   const statusText = await addAddresses({ address, name });
   return { message: statusText };
 }
+
+export async function removeAddresses(_: any, name: string) {
+  if (!name) {
+    return;
+  }
+
+  const supabase = createClient(cookies());
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (!session) {
+    redirect('/');
+  }
+
+  const { statusText, error } = await supabase
+    .from('addresses')
+    .delete()
+    .eq('user_id', session.user.id);
+
+  if (error) {
+    console.log(error.message);
+  }
+
+  revalidatePath('/');
+  return statusText;
+}
