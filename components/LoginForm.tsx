@@ -1,12 +1,25 @@
 'use client';
 
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import {
+  useSessionContext,
+  useSupabaseClient,
+} from '@supabase/auth-helpers-react';
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { Card, CardHeader, Divider, CardBody } from '@nextui-org/react';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function LoginForm({ className = '' }: { className?: string }) {
   const supabaseClient = useSupabaseClient();
+  const { session } = useSessionContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (session) {
+      router.refresh();
+    }
+  }, [session, router]);
 
   return (
     <Card className={`${className} max-w-[450px] p-5`}>
