@@ -1,5 +1,5 @@
 import AccountCard from '@/components/AccountCard';
-import { getAddresses } from '@/actions/addresses';
+import { getAddresses } from '@/lib/queries/addresses';
 
 export default async function AccountList() {
   const wallets = await getAddresses();

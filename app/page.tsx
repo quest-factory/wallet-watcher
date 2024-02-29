@@ -1,6 +1,6 @@
-import getUserSession from '@/actions/users';
 import AccountList from '@/components/AccountList';
 import LoginForm from '@/components/LoginForm';
+import { getUserSession } from '@/lib/queries/users';
 
 export default async function Home() {
   const session = await getUserSession();
