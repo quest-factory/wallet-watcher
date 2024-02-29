@@ -4,16 +4,32 @@ export const hexToDecimals = (value: string, decimals: number = 18) =>
 export const getCurrencyValue = (v: number) =>
   v < 0.1 ? `$${v}` : `$${new Intl.NumberFormat('en-US').format(v)}`;
 
-export const strWeiToStrEth = (strWei: string) => {
-  const length = strWei.length;
-  if (length >= 19) {
-    const firstPart = strWei.slice(0, length - 18);
-    const secondPart = strWei.slice(length - 18);
-    const result = `${firstPart},${secondPart}`;
-    return result;
-  } else {
-    return strWei;
+export const strWeiToStrEth = (weiString: string) => {
+  const weiLength = weiString.length;
+
+  if (weiLength <= 18) {
+    const paddedWeiString = '0'.repeat(18 - weiLength) + weiString;
+
+    const integerPart = '0';
+    const decimalPart = paddedWeiString;
+    const trimmedDecimalPart = decimalPart.replace(/0+$/, '');
+    const ethString =
+      trimmedDecimalPart.length > 0
+        ? `${integerPart}.${trimmedDecimalPart}`
+        : integerPart;
+
+    return ethString;
   }
+
+  const integerPart = weiString.slice(0, -18);
+  const decimalPart = weiString.slice(-18);
+  const trimmedDecimalPart = decimalPart.replace(/0+$/, '');
+  const ethString =
+    trimmedDecimalPart.length > 0
+      ? `${integerPart}.${trimmedDecimalPart}`
+      : integerPart;
+
+  return ethString;
 };
 
 export const reduceWalletAddress = (address: string) => {
