@@ -12,8 +12,8 @@ export default function NavBar() {
     <Navbar isBordered>
       <NavbarBrand>
         <Link href="/" className="flex">
-          <p className="font-bold text-inherit">Wallet </p>
-          <p className="font-bold text-inherit text-secondary">Watcher</p>
+          <p className="font-bold text-inherit">Explorers </p>
+          <p className="font-bold text-inherit text-secondary">Spy</p>
         </Link>
       </NavbarBrand>
 
