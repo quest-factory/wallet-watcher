@@ -18,7 +18,7 @@ export async function getAddresses() {
 
   const { data, error } = await supabase
     .from('addresses')
-    .select('name, address')
+    .select('name, address, id')
     .eq('user_id', session.user.id)
     .order('id', { ascending: true });
 
@@ -66,8 +66,8 @@ export async function addAddressesSubmit(_: any, formData: FormData) {
   return { message: statusText };
 }
 
-export async function removeAddresses(_: any, name: string) {
-  if (!name) {
+export async function removeAddresses(id: number) {
+  if (!id) {
     return;
   }
 
@@ -83,7 +83,8 @@ export async function removeAddresses(_: any, name: string) {
   const { statusText, error } = await supabase
     .from('addresses')
     .delete()
-    .eq('user_id', session.user.id);
+    .eq('user_id', session.user.id)
+    .eq('id', id);
 
   if (error) {
     console.log(error.message);
