@@ -6,7 +6,7 @@ import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 
-export async function getAddresses(): Promise<Tables<'addresses'> | null> {
+export async function getAddresses() {
   const supabase = createClient(cookies());
   const {
     data: { session },
@@ -18,7 +18,7 @@ export async function getAddresses(): Promise<Tables<'addresses'> | null> {
 
   const { data, error } = await supabase
     .from('addresses')
-    .select('*')
+    .select('name, address')
     .eq('user_id', session.user.id)
     .order('id', { ascending: true });
 
@@ -26,7 +26,7 @@ export async function getAddresses(): Promise<Tables<'addresses'> | null> {
     console.log(error.message);
   }
 
-  return data as Tables<'addresses'> | null;
+  return data;
 }
 
 export async function addAddresses({

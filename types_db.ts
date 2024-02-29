@@ -11,22 +11,22 @@ export type Database = {
     Tables: {
       addresses: {
         Row: {
-          address: string | null;
+          address: string;
           id: number;
-          name: string | null;
-          user_id: string | null;
+          name: string;
+          user_id: string;
         };
         Insert: {
-          address?: string | null;
+          address: string;
           id?: number;
-          name?: string | null;
-          user_id?: string | null;
+          name: string;
+          user_id?: string;
         };
         Update: {
-          address?: string | null;
+          address?: string;
           id?: number;
-          name?: string | null;
-          user_id?: string | null;
+          name?: string;
+          user_id?: string;
         };
         Relationships: [
           {
