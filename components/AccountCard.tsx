@@ -1,5 +1,6 @@
 import {
   Avatar,
+  Button,
   Card,
   CardBody,
   CardHeader,
@@ -10,6 +11,8 @@ import EthereumIcon from './icons/EthereumIcon';
 import useSWR from 'swr';
 import { getCurrencyValue } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
+import TrashIcon from './icons/TrashIcon';
+import { removeAddresses } from '@/actions/addresses';
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
@@ -45,7 +48,18 @@ export default function AccountCard({
       <CardHeader className="flex gap-3">
         <Avatar name={name} color="secondary" />
         <div className="flex flex-col">
-          <p className="text-md text-left">{name}</p>
+          <div className="text-md text-left flex items-center justify-between">
+            <p>{name}</p>
+            <Button
+              variant="flat"
+              size="sm"
+              isIconOnly
+              className="bg-white mt-[-15px] mr-[-12px]"
+              onPress={() => removeAddresses(name, address)}
+            >
+              <TrashIcon className="w-4 h-4" />
+            </Button>
+          </div>
           <p className="text-xs text-default-500">{address}</p>
         </div>
       </CardHeader>
