@@ -12,7 +12,7 @@ import EthereumIcon from './icons/EthereumIcon';
 import useSWR from 'swr';
 import { getCurrencyValue } from '@/lib/utils';
 import { useRouter } from 'next/navigation';
-import TrashIcon from './icons/TrashIcon';
+import RemoveIcon from './icons/RemoveIcon';
 import { removeAddresses } from '@/actions/addresses';
 import AccountCardSkeleton from './AccountCardSkeleton';
 
@@ -22,10 +22,12 @@ export default function AccountCard({
   className = '',
   name,
   address,
+  id,
 }: {
   className?: string;
   name: string;
   address: string;
+  id: number;
 }) {
   const router = useRouter();
   const { data: balance, isLoading: balanceIsLoading } = useSWR(
@@ -43,7 +45,7 @@ export default function AccountCard({
     <AccountCardSkeleton className="mx-auto" />
   ) : (
     <Card
-      className={`${className} max-w-[400px]`}
+      className={`${className} max-w-[400px] group`}
       isPressable
       onPress={() => {
         router.push(`/wallet-details/${address}`);
@@ -58,10 +60,10 @@ export default function AccountCard({
               variant="flat"
               size="sm"
               isIconOnly
-              className="bg-white mt-[-15px] mr-[-12px]"
-              onPress={() => removeAddresses(name, address)}
+              className="bg-white mt-[-16px] mr-[-12px] opacity-0 group-hover:opacity-100"
+              onPress={() => removeAddresses(id)}
             >
-              <TrashIcon className="w-4 h-4" />
+              <RemoveIcon className="w-4 h-4" />
             </Button>
           </div>
           <p className="text-xs text-default-500">{address}</p>
