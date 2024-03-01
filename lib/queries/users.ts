@@ -14,3 +14,17 @@ export async function getUserSession() {
 
   return session;
 }
+
+export async function getUser() {
+  const supabase = createClient(cookies());
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
+
+  if (error) {
+    console.log(error.message);
+  }
+
+  return user;
+}

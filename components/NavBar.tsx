@@ -1,9 +1,9 @@
 import { Link, Navbar, NavbarBrand, NavbarContent } from '@nextui-org/react';
-import { getUserSession } from '@/lib/queries/users';
+import { getUser } from '@/lib/queries/users';
 import UserDropdown from './UserDropdown';
 
 export default async function NavBar() {
-  const session = await getUserSession();
+  const user = await getUser();
 
   return (
     <Navbar isBordered>
@@ -15,8 +15,8 @@ export default async function NavBar() {
       </NavbarBrand>
 
       <NavbarContent justify="end">
-        {session?.user.email ? (
-          <UserDropdown email={session?.user.email} />
+        {user?.email ? (
+          <UserDropdown email={user?.email} />
         ) : (
           <Link href="/">Log in</Link>
         )}
