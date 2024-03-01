@@ -1,7 +1,6 @@
 import {
   Avatar,
   Button,
-  Chip,
   Navbar,
   NavbarBrand,
   NavbarContent,
@@ -9,16 +8,10 @@ import {
 } from '@nextui-org/react';
 import AddWalletModal from './AddWalletModal';
 import Link from 'next/link';
-import { createClient } from '@/lib/supabase/server';
-import { cookies } from 'next/headers';
+import { getSession, signOutUser } from '@/actions/users';
 
 export default async function NavBar() {
-  const supabase = createClient(cookies());
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  console.log('session : ', session?.user.email);
+  const session = await getSession();
 
   return (
     <Navbar isBordered>
@@ -38,7 +31,11 @@ export default async function NavBar() {
             <NavbarItem className="flex justify-end items-center gap-3">
               <div className="flex flex-col justify-center items-end text-xs gap-1">
                 <p className="font-bold">{session?.user.email}</p>
-                <Button className="h-4 text-xs">Disconnect</Button>
+                <form action={signOutUser}>
+                  <Button className="h-4 text-xs" type="submit">
+                    Disconnect
+                  </Button>
+                </form>
               </div>
               <Avatar name={session?.user.email} color="secondary" />
             </NavbarItem>
