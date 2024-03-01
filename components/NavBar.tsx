@@ -1,7 +1,6 @@
-import { Navbar, NavbarBrand, NavbarContent } from '@nextui-org/react';
+import { Link, Navbar, NavbarBrand, NavbarContent } from '@nextui-org/react';
 import { getUser } from '@/lib/queries/users';
 import UserDropdown from './UserDropdown';
-import Link from 'next/link';
 
 export default async function NavBar() {
   const user = await getUser();
