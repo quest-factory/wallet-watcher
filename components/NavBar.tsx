@@ -1,17 +1,9 @@
-import {
-  Avatar,
-  Button,
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-} from '@nextui-org/react';
-import AddWalletModal from './AddWalletModal';
-import Link from 'next/link';
-import { getSession, signOutUser } from '@/actions/users';
+import { Link, Navbar, NavbarBrand, NavbarContent } from '@nextui-org/react';
+import { getUserSession } from '@/lib/queries/users';
+import UserDropdown from './UserDropdown';
 
 export default async function NavBar() {
-  const session = await getSession();
+  const session = await getUserSession();
 
   return (
     <Navbar isBordered>
@@ -24,24 +16,9 @@ export default async function NavBar() {
 
       <NavbarContent justify="end">
         {session?.user.email ? (
-          <>
-            <NavbarItem>
-              <AddWalletModal />
-            </NavbarItem>
-            <NavbarItem className="flex justify-end items-center gap-3">
-              <div className="flex flex-col justify-center items-end text-xs gap-1">
-                <p className="font-bold">{session?.user.email}</p>
-                <form action={signOutUser}>
-                  <Button className="h-4 text-xs" type="submit">
-                    Disconnect
-                  </Button>
-                </form>
-              </div>
-              <Avatar name={session?.user.email} color="secondary" />
-            </NavbarItem>
-          </>
+          <UserDropdown email={session?.user.email} />
         ) : (
-          <NavbarItem>Not connected</NavbarItem>
+          <Link href="/">Log in</Link>
         )}
       </NavbarContent>
     </Navbar>

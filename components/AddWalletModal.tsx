@@ -27,7 +27,7 @@ export default function AddWalletModal() {
   return (
     <>
       <Button onPress={onOpen} color="secondary">
-        Add wallet to watch
+        Add wallet
       </Button>
 
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
