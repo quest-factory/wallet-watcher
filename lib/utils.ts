@@ -34,9 +34,9 @@ export const strWeiToStrEth = (weiString: string) => {
 
 export const reduceWalletAddress = (address: string) => {
   if (address.length > 10) {
-    const firstPart = address.slice(0, 6);
-    const lastPart = address.slice(-4);
-    const result = `${firstPart} - ${lastPart}`;
+    const firstPart = address.slice(0, 8);
+    const lastPart = address.slice(-6);
+    const result = `${firstPart}...${lastPart}`;
     return result;
   } else {
     return address;

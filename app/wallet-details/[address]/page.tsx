@@ -15,6 +15,7 @@ import {
   TableCell,
   Spinner,
   Snippet,
+  Tooltip,
 } from '@nextui-org/react';
 
 import useSWR from 'swr';
@@ -102,7 +103,11 @@ export default function WalletDetails({
                                   : ''
                               }
                             >
-                              {reduceWalletAddress(elem.from)}
+                              <Tooltip content={elem.from}>
+                                <p className="cursor-text">
+                                  {reduceWalletAddress(elem.from)}
+                                </p>
+                              </Tooltip>
                             </TableCell>
                             <TableCell
                               className={
@@ -112,7 +117,11 @@ export default function WalletDetails({
                                   : ''
                               }
                             >
-                              {reduceWalletAddress(elem.to)}
+                              <Tooltip content={elem.from}>
+                                <p className="cursor-pointer">
+                                  {reduceWalletAddress(elem.to)}
+                                </p>
+                              </Tooltip>
                             </TableCell>
                             <TableCell>
                               <div className="flex justify-start items-center gap-1">
