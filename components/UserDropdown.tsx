@@ -1,6 +1,5 @@
 'use client';
 
-import { signOutUser } from '@/actions/users';
 import {
   Dropdown,
   DropdownTrigger,
@@ -8,8 +7,18 @@ import {
   DropdownItem,
   Avatar,
 } from '@nextui-org/react';
+import { useRouter } from 'next/navigation';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
 export default function UserDropdown({ email }: { email?: string }) {
+  const supabase = useSupabaseClient();
+  const router = useRouter();
+
+  async function handleSignOut() {
+    await supabase.auth.signOut();
+    router.push('/');
+  }
+
   return (
     <Dropdown>
       <DropdownTrigger className="cursor-pointer hover:opacity-75">
@@ -22,10 +31,8 @@ export default function UserDropdown({ email }: { email?: string }) {
       </DropdownTrigger>
 
       <DropdownMenu aria-label="Static Actions">
-        <DropdownItem key="new">
-          <form action={signOutUser}>
-            <button type="submit">Sign out</button>
-          </form>
+        <DropdownItem key="new" onPress={handleSignOut}>
+          Sign out
         </DropdownItem>
       </DropdownMenu>
     </Dropdown>
