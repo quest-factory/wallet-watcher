@@ -45,7 +45,7 @@ export default function WalletDetails({
             <Snippet
               hideSymbol
               variant="bordered"
-              className="bg-white text-gray-600 h-12"
+              className="bg-white h-12 text-secondary"
             >
               {params.address}
             </Snippet>
@@ -94,10 +94,24 @@ export default function WalletDetails({
                             <TableCell>
                               {timeStampToDate(elem.timeStamp)}
                             </TableCell>
-                            <TableCell>
+                            <TableCell
+                              className={
+                                elem.from.toLocaleLowerCase() ==
+                                params.address.toLocaleLowerCase()
+                                  ? 'text-secondary font-bold'
+                                  : ''
+                              }
+                            >
                               {reduceWalletAddress(elem.from)}
                             </TableCell>
-                            <TableCell>
+                            <TableCell
+                              className={
+                                elem.to.toLocaleLowerCase() ==
+                                params.address.toLocaleLowerCase()
+                                  ? 'text-secondary font-bold'
+                                  : ''
+                              }
+                            >
                               {reduceWalletAddress(elem.to)}
                             </TableCell>
                             <TableCell>
