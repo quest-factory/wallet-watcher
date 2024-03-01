@@ -103,7 +103,11 @@ export default function WalletDetails({
                                   : ''
                               }
                             >
-                              <Tooltip content={elem.from}>
+                              <Tooltip
+                                color="foreground"
+                                showArrow={true}
+                                content={elem.from}
+                              >
                                 <p className="cursor-text">
                                   {reduceWalletAddress(elem.from)}
                                 </p>
@@ -117,7 +121,11 @@ export default function WalletDetails({
                                   : ''
                               }
                             >
-                              <Tooltip content={elem.from}>
+                              <Tooltip
+                                color="foreground"
+                                showArrow={true}
+                                content={elem.from}
+                              >
                                 <p className="cursor-pointer">
                                   {reduceWalletAddress(elem.to)}
                                 </p>
