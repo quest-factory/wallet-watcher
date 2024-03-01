@@ -9,7 +9,7 @@ export default async function NavBar() {
     <Navbar isBordered>
       <NavbarBrand>
         <Link href="/" className="flex">
-          <p className="font-bold text-inherit">Explorers </p>
+          <p className="font-bold text-inherit !text-black">Explorers </p>
           <p className="font-bold text-inherit text-secondary">Spy</p>
         </Link>
       </NavbarBrand>
