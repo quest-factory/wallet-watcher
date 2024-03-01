@@ -1,11 +1,4 @@
-import {
-  Avatar,
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  Divider,
-} from '@nextui-org/react';
+import { Avatar, Card, CardBody, CardHeader, Divider } from '@nextui-org/react';
 import EthereumIcon from './icons/EthereumIcon';
 import { getCurrencyValue } from '@/lib/utils';
 import RemoveIcon from './icons/RemoveIcon';
@@ -34,23 +27,23 @@ export default async function AccountCard({
 
   return (
     <Link href={`/wallet-details/${address}`}>
-      <Card className={`${className} max-w-[400px] group`}>
+      <Card className={`${className} w-96 group relative`}>
         <CardHeader className="flex gap-3">
           <Avatar name={name} color="secondary" />
           <div className="flex flex-col">
             <div className="text-md text-left flex items-center justify-between">
               <p>{name}</p>
-              <form action={removeAddressesAction}>
-                <Button
-                  variant="flat"
-                  size="sm"
-                  isIconOnly
-                  className="bg-white -mt-4 -mr-3 opacity-0 group-hover:opacity-100"
+              <form
+                className="absolute top-1 right-2"
+                action={removeAddressesAction}
+              >
+                <button
+                  className="opacity-0 group-hover:opacity-100"
                   title="Remove account"
                   type="submit"
                 >
                   <RemoveIcon className="size-4 opacity-60 hover:opacity-100" />
-                </Button>
+                </button>
               </form>
             </div>
           </div>
