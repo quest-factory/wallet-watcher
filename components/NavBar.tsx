@@ -1,6 +1,7 @@
-import { Link, Navbar, NavbarBrand, NavbarContent } from '@nextui-org/react';
+import { Navbar, NavbarBrand, NavbarContent } from '@nextui-org/react';
 import { getUser } from '@/lib/queries/users';
 import UserDropdown from './UserDropdown';
+import Link from 'next/link';
 
 export default async function NavBar() {
   const user = await getUser();
@@ -9,9 +10,7 @@ export default async function NavBar() {
     <Navbar isBordered>
       <NavbarBrand>
         <Link href="/" className="flex">
-          <p className="font-bold text-inherit" style={{ color: '#11181C' }}>
-            Explorers{' '}
-          </p>
+          <p className="font-bold text-inherit !text-black">Explorers </p>
           <p className="font-bold text-inherit text-secondary">Spy</p>
         </Link>
       </NavbarBrand>

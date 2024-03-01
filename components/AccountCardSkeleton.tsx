@@ -13,7 +13,7 @@ export default function AccountCardSkeleton({
   className?: string;
 }) {
   return (
-    <Card className={`${className} w-[378px]`}>
+    <Card className={`${className} w-96`}>
       <CardHeader className="flex gap-3">
         <Skeleton className="rounded-full w-10 h-10 flex-none" />
         <div className="flex flex-col w-full gap-1">

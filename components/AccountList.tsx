@@ -13,7 +13,7 @@ export default async function AccountList() {
         <h2>Accounts</h2>
         <AddWalletModal />
       </div>
-      <div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-3 w-fit">
+      <div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-5 w-fit">
         {wallets &&
           wallets.map((account, index) => (
             <Suspense

@@ -1,10 +1,10 @@
 import {
   Avatar,
-  Button,
   Card,
   CardBody,
   CardHeader,
   Divider,
+  Tooltip,
 } from '@nextui-org/react';
 import EthereumIcon from './icons/EthereumIcon';
 import { getCurrencyValue } from '@/lib/utils';
@@ -34,26 +34,31 @@ export default async function AccountCard({
 
   return (
     <Link href={`/wallet-details/${address}`}>
-      <Card className={`${className} max-w-[400px] group`}>
+      <Card className={`${className} max-w-96 group relative`}>
         <CardHeader className="flex gap-3">
-          <Avatar name={name} color="secondary" />
-          <div className="flex flex-col">
-            <div className="text-md text-left flex items-center justify-between">
-              <p>{name}</p>
-              <form action={removeAddressesAction}>
-                <Button
-                  variant="flat"
-                  size="sm"
-                  isIconOnly
-                  className="bg-white -mt-4 -mr-3 opacity-0 group-hover:opacity-100"
-                  title="Remove account"
-                  type="submit"
-                >
-                  <RemoveIcon className="size-4 opacity-60 hover:opacity-100" />
-                </Button>
-              </form>
-            </div>
+          <Avatar name={name} color="secondary" className="size-10 flex-none" />
+          <div className="flex flex-col truncate">
+            <p>{name}</p>
+            <p className="text-small truncate text-default-500">{address}</p>
           </div>
+
+          <form
+            className="absolute top-1 right-2"
+            action={removeAddressesAction}
+          >
+            <Tooltip
+              color="foreground"
+              content="Remove account"
+              showArrow={true}
+            >
+              <button
+                className="opacity-0 group-hover:opacity-100"
+                type="submit"
+              >
+                <RemoveIcon className="size-4 opacity-60 hover:opacity-100" />
+              </button>
+            </Tooltip>
+          </form>
         </CardHeader>
 
         <Divider />
