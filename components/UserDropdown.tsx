@@ -7,8 +7,8 @@ import {
   DropdownItem,
   Avatar,
 } from '@nextui-org/react';
-import { useRouter } from 'next/navigation';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
+import { useRouter } from 'next/navigation';
 
 export default function UserDropdown({ email }: { email?: string }) {
   const supabase = useSupabaseClient();
@@ -16,7 +16,7 @@ export default function UserDropdown({ email }: { email?: string }) {
 
   async function handleSignOut() {
     await supabase.auth.signOut();
-    router.push('/');
+    router.refresh();
   }
 
   return (
