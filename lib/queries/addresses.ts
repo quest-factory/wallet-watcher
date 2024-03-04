@@ -19,7 +19,7 @@ export async function getAddresses() {
     .order('id', { ascending: true });
 
   if (error) {
-    console.log(error.message);
+    console.error(error.message);
   }
 
   return data;

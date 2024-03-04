@@ -24,7 +24,7 @@ export async function addAddresses({
     .insert({ address, name, user_id: session.user.id });
 
   if (error) {
-    console.log(error.message);
+    console.error(error.message);
   }
 
   revalidatePath('/');
@@ -64,7 +64,7 @@ export async function removeAddresses(id: number) {
     .eq('id', id);
 
   if (error) {
-    console.log(error.message);
+    console.error(error.message);
   }
 
   revalidatePath('/');
