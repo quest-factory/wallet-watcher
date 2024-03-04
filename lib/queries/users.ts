@@ -9,7 +9,7 @@ export async function getUserSession() {
   } = await supabase.auth.getSession();
 
   if (error) {
-    console.log(error.message);
+    console.error(error.message);
   }
 
   return session;
@@ -23,7 +23,7 @@ export async function getUser() {
   } = await supabase.auth.getUser();
 
   if (error) {
-    console.log(error.message);
+    console.error(error.message);
   }
 
   return user;
