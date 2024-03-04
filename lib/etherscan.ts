@@ -9,7 +9,6 @@ export async function getTransactions(address: string) {
     }
 
     const data = await response.json();
-    console.log('Data received:', data);
     return data;
   } catch (error) {
     console.error('Error fetching data:', error);
