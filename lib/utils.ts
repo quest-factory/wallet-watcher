@@ -50,7 +50,10 @@ export const timeStampToDate = (timeStamp: string) => {
   const month = (dateFormat.getMonth() + 1).toString().padStart(2, '0');
   const year = dateFormat.getFullYear();
 
-  const dateString = `${day}/${month}/${year}`;
+  const hours = dateFormat.getHours();
+  const min = dateFormat.getMinutes();
+
+  const dateString = `${day}/${month}/${year} ${hours}:${min}`;
 
   return dateString;
 };
