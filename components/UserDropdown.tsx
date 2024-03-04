@@ -6,6 +6,7 @@ import {
   DropdownMenu,
   DropdownItem,
   Avatar,
+  Chip,
 } from '@nextui-org/react';
 import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/navigation';
@@ -31,6 +32,11 @@ export default function UserDropdown({ email }: { email?: string }) {
       </DropdownTrigger>
 
       <DropdownMenu aria-label="Static Actions">
+        <DropdownItem key="mail" className="hover:!bg-white !cursor-auto">
+          <Chip size="sm" className="font-semibold">
+            {email}
+          </Chip>
+        </DropdownItem>
         <DropdownItem key="new" onPress={handleSignOut}>
           Sign out
         </DropdownItem>
