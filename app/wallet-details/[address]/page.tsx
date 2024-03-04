@@ -10,7 +10,7 @@ export default async function WalletDetails({
   params: { address: string };
 }) {
   return (
-    <main className="w-full mx-auto max-w-[80%] mt-10">
+    <main className="w-full mx-auto max-w-[80%] my-10">
       <section className="space-y-12 flex flex-col items-center">
         <h2>Wallet details</h2>
 
