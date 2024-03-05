@@ -9,7 +9,6 @@ import {
 import {
   Button,
   Link,
-  Pagination,
   Table,
   TableBody,
   TableCell,
@@ -28,9 +27,15 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 interface TransactionsTableProps {
   address: string;
+  wallets: any;
 }
 
-export default function TransactionsTable({ address }: TransactionsTableProps) {
+export default function TransactionsTable({
+  address,
+  wallets,
+}: TransactionsTableProps) {
+  console.log('wal ', wallets);
+
   const [pageIndex, setPageIndex] = useState(1);
 
   const { data: transactions, isLoading } = useSWR(
