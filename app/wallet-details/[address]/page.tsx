@@ -50,7 +50,6 @@ export default async function WalletDetails({
                     <p className="text-gray-600">
                       This wallet is not in your saved accounts.
                     </p>
-                    {/* <Button size="sm" color="secondary" className="h-5">Add this wallet</Button> */}
                     <AddWalletModal
                       customText="Add this wallet"
                       addressPreset={params.address}
