@@ -9,7 +9,10 @@ import { revalidatePath } from 'next/cache';
 export async function addAddresses({
   address,
   name,
-}: Omit<Tables<'addresses'>, 'id' | 'user_id'>) {
+}: {
+  address: Tables<'addresses'>['address'];
+  name: Tables<'addresses'>['name'];
+}) {
   const supabase = createClient(cookies());
   const {
     data: { session },

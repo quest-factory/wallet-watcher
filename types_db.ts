@@ -12,25 +12,64 @@ export type Database = {
       addresses: {
         Row: {
           address: string;
+          balance: number;
           id: number;
           name: string;
+          previous_balance: number;
           user_id: string;
         };
         Insert: {
           address: string;
+          balance?: number;
           id?: number;
           name: string;
+          previous_balance?: number;
           user_id?: string;
         };
         Update: {
           address?: string;
+          balance?: number;
           id?: number;
           name?: string;
+          previous_balance?: number;
           user_id?: string;
         };
         Relationships: [
           {
             foreignKeyName: 'public_addresses_user_id_fkey';
+            columns: ['user_id'];
+            isOneToOne: false;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      notifications: {
+        Row: {
+          address_id: number;
+          id: number;
+          user_id: string;
+        };
+        Insert: {
+          address_id: number;
+          id?: number;
+          user_id: string;
+        };
+        Update: {
+          address_id?: number;
+          id?: number;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'public_notifications_address_id_fkey';
+            columns: ['address_id'];
+            isOneToOne: false;
+            referencedRelation: 'addresses';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'public_notifications_user_id_fkey';
             columns: ['user_id'];
             isOneToOne: false;
             referencedRelation: 'users';
