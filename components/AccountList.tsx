@@ -11,7 +11,7 @@ export default async function AccountList() {
     <section className="space-y-12 flex flex-col items-center">
       <div className="flex w-full justify-between px-5">
         <div className="w-full" />
-        <h2 className="w-full text-center">Accounts</h2>
+        <h3 className="w-full text-center">Accounts</h3>
         <div className="w-full flex justify-end">
           <AddWalletModal />
         </div>
