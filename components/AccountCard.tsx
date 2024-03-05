@@ -67,7 +67,9 @@ export default async function AccountCard({
           <span className="flex items-center gap-1">
             <EthereumIcon className="h-4 w-4" />
             {balance} (
-            {balance !== undefined && getCurrencyValue(price * balance)})
+            {balance !== undefined &&
+              getCurrencyValue(price * balance).replace(/,/g, ' ')}
+            )
           </span>
         </CardBody>
       </Card>
