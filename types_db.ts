@@ -15,6 +15,7 @@ export type Database = {
           balance: number;
           id: number;
           name: string;
+          notification_id: number | null;
           previous_balance: number;
           user_id: string;
         };
@@ -23,6 +24,7 @@ export type Database = {
           balance?: number;
           id?: number;
           name: string;
+          notification_id?: number | null;
           previous_balance?: number;
           user_id?: string;
         };
@@ -31,10 +33,18 @@ export type Database = {
           balance?: number;
           id?: number;
           name?: string;
+          notification_id?: number | null;
           previous_balance?: number;
           user_id?: string;
         };
         Relationships: [
+          {
+            foreignKeyName: 'public_addresses_notification_id_fkey';
+            columns: ['notification_id'];
+            isOneToOne: false;
+            referencedRelation: 'notifications';
+            referencedColumns: ['id'];
+          },
           {
             foreignKeyName: 'public_addresses_user_id_fkey';
             columns: ['user_id'];

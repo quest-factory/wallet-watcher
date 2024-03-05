@@ -1,4 +1,8 @@
-export default function BellIcon({ className = '' }: { className?: string }) {
+export default function BellSlashIcon({
+  className = '',
+}: {
+  className?: string;
+}) {
   return (
     <svg
       className={className}
