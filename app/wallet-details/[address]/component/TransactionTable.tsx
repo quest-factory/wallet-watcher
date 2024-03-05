@@ -8,6 +8,7 @@ import {
 } from '@/lib/utils';
 import {
   Button,
+  Link,
   Pagination,
   Table,
   TableBody,
@@ -108,9 +109,12 @@ export default function TransactionsTable({ address }: TransactionsTableProps) {
                             showArrow={true}
                             content={elem.from}
                           >
-                            <p className="cursor-text w-fit">
+                            <Link
+                              href={`/wallet-details/${elem.from}`}
+                              className="text-current cursor-pointer hover:underline w-fit"
+                            >
                               {reduceWalletAddress(elem.from)}
-                            </p>
+                            </Link>
                           </Tooltip>
                         </TableCell>
                         <TableCell
@@ -126,9 +130,12 @@ export default function TransactionsTable({ address }: TransactionsTableProps) {
                             showArrow={true}
                             content={elem.to}
                           >
-                            <p className="cursor-pointer w-fit">
+                            <Link
+                              href={`/wallet-details/${elem.to}`}
+                              className="text-current cursor-pointer hover:underline w-fit"
+                            >
                               {reduceWalletAddress(elem.to)}
-                            </p>
+                            </Link>
                           </Tooltip>
                         </TableCell>
                         <TableCell>
