@@ -9,8 +9,11 @@ export default async function AccountList() {
   return (
     <section className="space-y-12 flex flex-col items-center">
       <div className="flex w-full justify-between px-5">
-        <h2>Accounts</h2>
-        <AddWalletModal />
+        <div className="w-full" />
+        <h3 className="w-full text-center">Accounts</h3>
+        <div className="w-full flex justify-end">
+          <AddWalletModal />
+        </div>
       </div>
       <div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-5 w-fit">
         {wallets &&

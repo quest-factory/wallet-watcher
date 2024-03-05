@@ -7,6 +7,8 @@ import {
   timeStampToDate,
 } from '@/lib/utils';
 import {
+  Button,
+  Link,
   Table,
   TableBody,
   TableCell,
@@ -18,15 +20,26 @@ import {
 
 import useSWR from 'swr';
 import TransactionsTableSkeleton from './TransactionsTableSkeleton';
+import { useState } from 'react';
+import ChevronLeft from '@/components/icons/ChevronLeft';
+import ChevronRight from '@/components/icons/ChevronRight';
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 interface TransactionsTableProps {
   address: string;
+  wallets: any;
 }
 
-export default function TransactionsTable({ address }: TransactionsTableProps) {
+export default function TransactionsTable({
+  address,
+  wallets,
+}: TransactionsTableProps) {
+  console.log('wal ', wallets);
+
+  const [pageIndex, setPageIndex] = useState(1);
+
   const { data: transactions, isLoading } = useSWR(
-    `/api/transactions/${address}`,
+    `/api/transactions/${address}/${pageIndex}`,
     fetcher
   );
 
@@ -44,7 +57,33 @@ export default function TransactionsTable({ address }: TransactionsTableProps) {
               <p className="font-bold w-full text-center">
                 Latest transactions
               </p>
-              <Table aria-label="Example static collection table w-full">
+              <Table
+                aria-label="Example static collection table w-full"
+                bottomContent={
+                  <div className="flex w-full justify-center items-center">
+                    <Button
+                      isDisabled={pageIndex === 1}
+                      isIconOnly
+                      color="secondary"
+                      aria-label="previous"
+                      onPress={() => setPageIndex(pageIndex - 1)}
+                    >
+                      <ChevronLeft className="h-5 w-5 fill-white" />
+                    </Button>
+                    <Button disabled className="font-bold mx-5">
+                      {pageIndex}
+                    </Button>
+                    <Button
+                      isIconOnly
+                      color="secondary"
+                      aria-label="next"
+                      onPress={() => setPageIndex(pageIndex + 1)}
+                    >
+                      <ChevronRight className="h-5 w-5 fill-white" />
+                    </Button>
+                  </div>
+                }
+              >
                 <TableHeader>
                   <TableColumn>#</TableColumn>
                   <TableColumn>DATE</TableColumn>
@@ -60,7 +99,7 @@ export default function TransactionsTable({ address }: TransactionsTableProps) {
                     )
                     .map((elem: any, index: any) => (
                       <TableRow key={index}>
-                        <TableCell>{index + 1}</TableCell>
+                        <TableCell>{index + 20 * pageIndex}</TableCell>
                         <TableCell>{timeStampToDate(elem.timeStamp)}</TableCell>
                         <TableCell
                           className={
@@ -75,9 +114,12 @@ export default function TransactionsTable({ address }: TransactionsTableProps) {
                             showArrow={true}
                             content={elem.from}
                           >
-                            <p className="cursor-text w-fit">
+                            <Link
+                              href={`/wallet-details/${elem.from}`}
+                              className="text-current cursor-pointer hover:underline w-fit"
+                            >
                               {reduceWalletAddress(elem.from)}
-                            </p>
+                            </Link>
                           </Tooltip>
                         </TableCell>
                         <TableCell
@@ -93,9 +135,12 @@ export default function TransactionsTable({ address }: TransactionsTableProps) {
                             showArrow={true}
                             content={elem.to}
                           >
-                            <p className="cursor-pointer w-fit">
+                            <Link
+                              href={`/wallet-details/${elem.to}`}
+                              className="text-current cursor-pointer hover:underline w-fit"
+                            >
                               {reduceWalletAddress(elem.to)}
-                            </p>
+                            </Link>
                           </Tooltip>
                         </TableCell>
                         <TableCell>

@@ -14,7 +14,17 @@ import { addAddressesSubmit } from '@/actions/addresses';
 import { useFormState, useFormStatus } from 'react-dom';
 import { useEffect } from 'react';
 
-export default function AddWalletModal() {
+interface AddWalletModalProps {
+  addressPreset?: string;
+  btnClassName?: string;
+  customText?: string;
+}
+
+export default function AddWalletModal({
+  addressPreset,
+  btnClassName,
+  customText,
+}: AddWalletModalProps) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const [state, formAction] = useFormState(addAddressesSubmit, { message: '' });
 
@@ -26,8 +36,8 @@ export default function AddWalletModal() {
 
   return (
     <>
-      <Button onPress={onOpen} color="secondary">
-        Add wallet
+      <Button onPress={onOpen} color="secondary" className={btnClassName}>
+        {customText ? customText : 'Add wallet'}
       </Button>
 
       <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center">
@@ -44,7 +54,12 @@ export default function AddWalletModal() {
                 name="name"
                 variant="bordered"
               />
-              <Input label="Wallet address" variant="bordered" name="address" />
+              <Input
+                label="Wallet address"
+                variant="bordered"
+                name="address"
+                value={addressPreset ? addressPreset : ''}
+              />
             </ModalBody>
             <ModalFooter>
               <Button color="default" variant="flat" onPress={onClose}>
