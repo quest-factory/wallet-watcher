@@ -6,9 +6,9 @@ import {
   Divider,
   Tooltip,
 } from '@nextui-org/react';
-import EthereumIcon from './icons/EthereumIcon';
+import EthereumIcon from '../icons/EthereumIcon';
 import { getCurrencyValue } from '@/lib/utils';
-import RemoveIcon from './icons/RemoveIcon';
+import RemoveIcon from '../icons/RemoveIcon';
 import { getBalance } from '@/lib/infura';
 import { getQuotes } from '@/lib/coin_market';
 import { removeAddresses } from '@/actions/addresses';
@@ -42,23 +42,22 @@ export default async function AccountCard({
             <p className="text-small truncate text-default-500">{address}</p>
           </div>
 
-          <form
-            className="absolute top-1 right-2"
-            action={removeAddressesAction}
-          >
-            <Tooltip
-              color="foreground"
-              content="Remove account"
-              showArrow={true}
-            >
-              <button
-                className="opacity-0 group-hover:opacity-100"
-                type="submit"
+          <div className="absolute top-1 right-2">
+            <form action={removeAddressesAction}>
+              <Tooltip
+                color="foreground"
+                content="Remove account"
+                showArrow={true}
               >
-                <RemoveIcon className="size-4 opacity-60 hover:opacity-100" />
-              </button>
-            </Tooltip>
-          </form>
+                <button
+                  className="opacity-0 group-hover:opacity-100"
+                  type="submit"
+                >
+                  <RemoveIcon className="size-4 opacity-60 hover:opacity-100" />
+                </button>
+              </Tooltip>
+            </form>
+          </div>
         </CardHeader>
 
         <Divider />
