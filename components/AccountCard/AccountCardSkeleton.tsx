@@ -5,7 +5,7 @@ import {
   Divider,
   CardBody,
 } from '@nextui-org/react';
-import EthereumIcon from './icons/EthereumIcon';
+import EthereumIcon from '../icons/EthereumIcon';
 
 export default function AccountCardSkeleton({
   className = '',

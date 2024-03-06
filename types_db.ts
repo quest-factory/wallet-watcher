@@ -12,20 +12,29 @@ export type Database = {
       addresses: {
         Row: {
           address: string;
+          alert_enabled: boolean;
+          balance: number;
           id: number;
           name: string;
+          previous_balance: number;
           user_id: string;
         };
         Insert: {
           address: string;
+          alert_enabled?: boolean;
+          balance?: number;
           id?: number;
           name: string;
+          previous_balance?: number;
           user_id?: string;
         };
         Update: {
           address?: string;
+          alert_enabled?: boolean;
+          balance?: number;
           id?: number;
           name?: string;
+          previous_balance?: number;
           user_id?: string;
         };
         Relationships: [
@@ -33,29 +42,6 @@ export type Database = {
             foreignKeyName: 'public_addresses_user_id_fkey';
             columns: ['user_id'];
             isOneToOne: false;
-            referencedRelation: 'users';
-            referencedColumns: ['id'];
-          },
-        ];
-      };
-      users: {
-        Row: {
-          email: string | null;
-          id: string;
-        };
-        Insert: {
-          email?: string | null;
-          id: string;
-        };
-        Update: {
-          email?: string | null;
-          id?: string;
-        };
-        Relationships: [
-          {
-            foreignKeyName: 'users_id_fkey';
-            columns: ['id'];
-            isOneToOne: true;
             referencedRelation: 'users';
             referencedColumns: ['id'];
           },

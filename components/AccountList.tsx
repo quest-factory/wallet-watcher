@@ -1,7 +1,6 @@
-import AccountCard from '@/components/AccountCard';
+import AccountCard, { AccountCardSkeleton } from '@/components/AccountCard';
 import { getAddresses } from '@/lib/queries/addresses';
 import { Suspense } from 'react';
-import AccountCardSkeleton from './AccountCardSkeleton';
 import AddWalletModal from './AddWalletModal';
 
 export default async function AccountList() {
