@@ -86,6 +86,295 @@ export default function TransactionsTableSkeleton() {
               <Skeleton className="w-32 h-5 rounded-lg" />
             </TableCell>
           </TableRow>
+          <TableRow>
+            <TableCell>
+              <Skeleton className="w-5 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Skeleton className="w-5 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Skeleton className="w-5 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Skeleton className="w-5 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Skeleton className="w-5 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Skeleton className="w-5 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Skeleton className="w-5 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Skeleton className="w-5 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Skeleton className="w-5 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Skeleton className="w-5 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Skeleton className="w-5 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Skeleton className="w-5 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Skeleton className="w-5 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Skeleton className="w-5 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Skeleton className="w-5 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Skeleton className="w-5 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>
+              <Skeleton className="w-5 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+            <TableCell>
+              <Skeleton className="w-32 h-5 rounded-lg" />
+            </TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     </div>
