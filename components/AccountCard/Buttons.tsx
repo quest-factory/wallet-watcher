@@ -9,17 +9,21 @@ import {
 import BellIcon from '../icons/BellIcon';
 import TrashIcon from '../icons/TrashIcon';
 import EllipsisIcon from '../icons/EllipsisIcon';
-import { removeAddresses } from '@/actions/addresses';
+import { removeAddresses, updateAlert } from '@/actions/addresses';
 import BellSlashIcon from '../icons/BellSlashIcon';
 import { Tables } from '@/types_db';
 
 export default function Buttons({
   className,
   addressId,
+  alert_enabled,
 }: {
   className?: string;
   addressId: number;
+  alert_enabled: Tables<'addresses'>['alert_enabled'];
 }) {
+  const iconClasses = 'size-4 opacity-60';
+
   return (
     <Dropdown className={className}>
       <DropdownTrigger
@@ -34,29 +38,29 @@ export default function Buttons({
       </DropdownTrigger>
 
       <DropdownMenu variant="flat">
-        {/* {notificationId ? (
+        {alert_enabled ? (
           <DropdownItem
             key="disable_alert"
-            startContent={<BellSlashIcon className="size-4 opacity-60" />}
-            onPress={() => removeNotification(notificationId)}
+            startContent={<BellSlashIcon className={iconClasses} />}
+            onPress={() => updateAlert({ id: addressId, alert_enabled: false })}
           >
             Disable alert
           </DropdownItem>
         ) : (
           <DropdownItem
             key="enable_alert"
-            startContent={<BellIcon className="size-4 opacity-60" />}
-            onPress={() => createNotification(addressId)}
+            startContent={<BellIcon className={iconClasses} />}
+            onPress={() => updateAlert({ id: addressId, alert_enabled: true })}
           >
             Enable alert
           </DropdownItem>
-        )} */}
+        )}
 
         <DropdownItem
           key="delete"
           className="text-danger"
           color="danger"
-          startContent={<TrashIcon className="size-4 text-danger opacity-60" />}
+          startContent={<TrashIcon className={`${iconClasses} text-danger`} />}
           onPress={() => removeAddresses(addressId)}
         >
           Remove account

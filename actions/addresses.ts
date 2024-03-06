@@ -5,6 +5,19 @@ import { Tables } from '../types_db';
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
+import { SupabaseClient } from '@supabase/supabase-js';
+
+async function checkUser(supabase: SupabaseClient) {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    redirect('/');
+  }
+
+  return user;
+}
 
 export async function addAddresses({
   address,
@@ -14,17 +27,11 @@ export async function addAddresses({
   name: Tables<'addresses'>['name'];
 }) {
   const supabase = createClient(cookies());
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  if (!session) {
-    redirect('/');
-  }
+  const user = await checkUser(supabase);
 
   const { statusText, error } = await supabase
     .from('addresses')
-    .insert({ address, name, user_id: session.user.id });
+    .insert({ address, name, user_id: user.id });
 
   if (error) {
     console.error(error.message);
@@ -52,18 +59,12 @@ export async function removeAddresses(id: number) {
   }
 
   const supabase = createClient(cookies());
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  if (!session) {
-    redirect('/');
-  }
+  const user = await checkUser(supabase);
 
   const { statusText, error } = await supabase
     .from('addresses')
     .delete()
-    .eq('user_id', session.user.id)
+    .eq('user_id', user.id)
     .eq('id', id);
 
   if (error) {
@@ -72,4 +73,26 @@ export async function removeAddresses(id: number) {
 
   revalidatePath('/');
   return statusText;
+}
+
+export async function updateAlert({
+  id,
+  alert_enabled,
+}: {
+  id: Tables<'addresses'>['id'];
+  alert_enabled: Tables<'addresses'>['alert_enabled'];
+}) {
+  const supabase = createClient(cookies());
+
+  const { error } = await supabase
+    .from('addresses')
+    .update({ alert_enabled: alert_enabled })
+    .eq('id', id)
+    .select();
+
+  if (error) {
+    console.error(error.message);
+  }
+
+  revalidatePath('/');
 }
