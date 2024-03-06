@@ -14,15 +14,7 @@ export async function getAddresses() {
 
   const { data, error } = await supabase
     .from('addresses')
-    .select(
-      `
-      id,
-      name,
-      address, 
-      notification_id (
-        id
-      )`
-    )
+    .select('*')
     .eq('user_id', session.user.id)
     .order('id', { ascending: true });
 

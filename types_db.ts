@@ -15,7 +15,6 @@ export type Database = {
           balance: number;
           id: number;
           name: string;
-          notification_id: number | null;
           previous_balance: number;
           user_id: string;
         };
@@ -24,7 +23,6 @@ export type Database = {
           balance?: number;
           id?: number;
           name: string;
-          notification_id?: number | null;
           previous_balance?: number;
           user_id?: string;
         };
@@ -33,53 +31,12 @@ export type Database = {
           balance?: number;
           id?: number;
           name?: string;
-          notification_id?: number | null;
           previous_balance?: number;
           user_id?: string;
         };
         Relationships: [
           {
-            foreignKeyName: 'public_addresses_notification_id_fkey';
-            columns: ['notification_id'];
-            isOneToOne: false;
-            referencedRelation: 'notifications';
-            referencedColumns: ['id'];
-          },
-          {
             foreignKeyName: 'public_addresses_user_id_fkey';
-            columns: ['user_id'];
-            isOneToOne: false;
-            referencedRelation: 'users';
-            referencedColumns: ['id'];
-          },
-        ];
-      };
-      notifications: {
-        Row: {
-          address_id: number;
-          id: number;
-          user_id: string;
-        };
-        Insert: {
-          address_id: number;
-          id?: number;
-          user_id: string;
-        };
-        Update: {
-          address_id?: number;
-          id?: number;
-          user_id?: string;
-        };
-        Relationships: [
-          {
-            foreignKeyName: 'public_notifications_address_id_fkey';
-            columns: ['address_id'];
-            isOneToOne: false;
-            referencedRelation: 'addresses';
-            referencedColumns: ['id'];
-          },
-          {
-            foreignKeyName: 'public_notifications_user_id_fkey';
             columns: ['user_id'];
             isOneToOne: false;
             referencedRelation: 'users';

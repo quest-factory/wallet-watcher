@@ -17,18 +17,12 @@ export default async function AccountList() {
       </div>
       <div className="grid lg:grid-cols-2 2xl:grid-cols-3 gap-5 w-fit">
         {wallets &&
-          wallets.map(({ notification_id, ...account }, index) => (
+          wallets.map((account, index) => (
             <Suspense
               key={index}
               fallback={<AccountCardSkeleton key={index} className="mx-auto" />}
             >
-              <AccountCard
-                key={index}
-                className="mx-auto"
-                // @ts-ignore
-                notification_id={notification_id?.id}
-                {...account}
-              />
+              <AccountCard key={index} className="mx-auto" {...account} />
             </Suspense>
           ))}
       </div>

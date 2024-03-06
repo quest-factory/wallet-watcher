@@ -9,10 +9,6 @@ import {
 import BellIcon from '../icons/BellIcon';
 import TrashIcon from '../icons/TrashIcon';
 import EllipsisIcon from '../icons/EllipsisIcon';
-import {
-  createNotification,
-  removeNotification,
-} from '@/actions/notifications';
 import { removeAddresses } from '@/actions/addresses';
 import BellSlashIcon from '../icons/BellSlashIcon';
 import { Tables } from '@/types_db';
@@ -20,11 +16,9 @@ import { Tables } from '@/types_db';
 export default function Buttons({
   className,
   addressId,
-  notificationId,
 }: {
   className?: string;
   addressId: number;
-  notificationId?: Tables<'notifications'>['id'];
 }) {
   return (
     <Dropdown className={className}>
@@ -40,7 +34,7 @@ export default function Buttons({
       </DropdownTrigger>
 
       <DropdownMenu variant="flat">
-        {notificationId ? (
+        {/* {notificationId ? (
           <DropdownItem
             key="disable_alert"
             startContent={<BellSlashIcon className="size-4 opacity-60" />}
@@ -56,7 +50,7 @@ export default function Buttons({
           >
             Enable alert
           </DropdownItem>
-        )}
+        )} */}
 
         <DropdownItem
           key="delete"

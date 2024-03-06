@@ -5,20 +5,17 @@ import { getBalance } from '@/lib/infura';
 import { getQuotes } from '@/lib/coin_market';
 import Link from 'next/link';
 import Buttons from './Buttons';
-import { Tables } from '@/types_db';
 
 export default async function AccountCard({
   className = '',
   name,
   address,
   id,
-  notification_id,
 }: {
   className?: string;
   name: string;
   address: string;
   id: number;
-  notification_id?: Tables<'notifications'>['id'];
 }) {
   const [quotes, balance] = await Promise.all([
     getQuotes('ETH'),
@@ -36,7 +33,7 @@ export default async function AccountCard({
             <p className="text-small truncate text-default-500">{address}</p>
           </div>
 
-          <Buttons addressId={id} notificationId={notification_id} />
+          <Buttons addressId={id} />
         </CardHeader>
 
         <Divider />
