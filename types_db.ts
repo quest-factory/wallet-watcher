@@ -12,6 +12,7 @@ export type Database = {
       addresses: {
         Row: {
           address: string;
+          alert_enabled: boolean;
           balance: number;
           id: number;
           name: string;
@@ -20,6 +21,7 @@ export type Database = {
         };
         Insert: {
           address: string;
+          alert_enabled?: boolean;
           balance?: number;
           id?: number;
           name: string;
@@ -28,6 +30,7 @@ export type Database = {
         };
         Update: {
           address?: string;
+          alert_enabled?: boolean;
           balance?: number;
           id?: number;
           name?: string;
