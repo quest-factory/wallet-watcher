@@ -47,9 +47,9 @@ export default async function WalletDetails({
                   ))}
                 </>
               ) : (
-                <Card className="h-7 mt-5">
-                  <CardBody className="text-sm flex flex-row items-center justify-center gap-3 py-2">
-                    <p className="text-gray-600">
+                <Card className="h-fit mt-fit">
+                  <CardBody className="text-sm flex md:flex-row flex-col items-center justify-center gap-3 py-2">
+                    <p className="text-gray-600 overflow-hidden overflow-ellipsis whitespace-nowrap">
                       This wallet is not in your saved accounts.
                     </p>
                     <AddWalletModal
@@ -63,7 +63,7 @@ export default async function WalletDetails({
             </div>
           </h3>
         </div>
-        <div className="flex w-full justify-center gap-5">
+        <div className="flex w-full md:flex-row flex-col justify-center gap-5 overflow-hidden overflow-ellipsis whitespace-nowrap">
           <div className="flex flex-col justify-items-center w-full text-center">
             <p className="font-bold">Address</p>
             <Snippet

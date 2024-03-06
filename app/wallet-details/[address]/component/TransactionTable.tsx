@@ -73,12 +73,12 @@ export default function TransactionsTable({
           typeof transactions.result !== 'string' &&
           transactions.result.length > 0 ? (
             <>
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center md:flex-row flex-col">
                 <div className="w-1/3" />
-                <p className="font-bold text-center w-1/3">
+                <p className="font-bold text-center md:w-1/3 w-full">
                   Latest transactions
                 </p>
-                <div className="flex justify-end items-center gap-3 w-1/3">
+                <div className="flex md:justify-end justify-center items-center gap-3 w-1/3">
                   <p className="text-gray-600 text-xs whitespace-no-wrap shrink-0">
                     See accounts names
                   </p>
