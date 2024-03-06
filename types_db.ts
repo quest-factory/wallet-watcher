@@ -47,29 +47,6 @@ export type Database = {
           },
         ];
       };
-      users: {
-        Row: {
-          email: string | null;
-          id: string;
-        };
-        Insert: {
-          email?: string | null;
-          id: string;
-        };
-        Update: {
-          email?: string | null;
-          id?: string;
-        };
-        Relationships: [
-          {
-            foreignKeyName: 'users_id_fkey';
-            columns: ['id'];
-            isOneToOne: true;
-            referencedRelation: 'users';
-            referencedColumns: ['id'];
-          },
-        ];
-      };
     };
     Views: {
       [_ in never]: never;

@@ -41,7 +41,9 @@ export default async function WalletDetails({
               {getCurrentWallet().length > 0 ? (
                 <>
                   {getCurrentWallet().map((elem, index) => (
-                    <p className="text-secondary font-bold">{elem.name}</p>
+                    <p key={index} className="text-secondary font-bold">
+                      {elem.name}
+                    </p>
                   ))}
                 </>
               ) : (
