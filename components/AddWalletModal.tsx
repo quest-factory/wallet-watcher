@@ -58,7 +58,7 @@ export default function AddWalletModal({
                 label="Wallet address"
                 variant="bordered"
                 name="address"
-                value={addressPreset ? addressPreset : ''}
+                defaultValue={addressPreset ? addressPreset : ''}
               />
             </ModalBody>
             <ModalFooter>
