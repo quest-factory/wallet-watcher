@@ -8,7 +8,9 @@ import {
 } from '@/lib/utils';
 import {
   Button,
+  Chip,
   Link,
+  Switch,
   Table,
   TableBody,
   TableCell,
@@ -34,14 +36,31 @@ export default function TransactionsTable({
   address,
   wallets,
 }: TransactionsTableProps) {
-  console.log('wal ', wallets);
-
   const [pageIndex, setPageIndex] = useState(1);
+  const [seeNames, setSeeNames] = useState<boolean>(true);
 
   const { data: transactions, isLoading } = useSWR(
     `/api/transactions/${address}/${pageIndex}`,
     fetcher
   );
+
+  const getName = (currentAddress: string) => {
+    const findAccounts = wallets.filter(
+      (wallets: any) =>
+        wallets.address.toLocaleLowerCase() ===
+        currentAddress.toLocaleLowerCase()
+    );
+
+    if (findAccounts.length > 0) {
+      let finalName = '';
+      findAccounts.map((elem: any, index: number) => {
+        finalName = `${finalName}${index === 0 ? '' : ' / '}${elem.name}`;
+      });
+      return finalName;
+    }
+
+    return '';
+  };
 
   return (
     <>
@@ -54,9 +73,24 @@ export default function TransactionsTable({
           typeof transactions.result !== 'string' &&
           transactions.result.length > 0 ? (
             <>
-              <p className="font-bold w-full text-center">
-                Latest transactions
-              </p>
+              <div className="flex justify-between items-center">
+                <div className="w-1/3" />
+                <p className="font-bold text-center w-1/3">
+                  Latest transactions
+                </p>
+                <div className="flex justify-end items-center gap-3 w-1/3">
+                  <p className="text-gray-600 text-xs whitespace-no-wrap shrink-0">
+                    See accounts names
+                  </p>
+                  <Switch
+                    defaultSelected
+                    size="sm"
+                    aria-label="Automatic updates"
+                    color="secondary"
+                    onChange={(e: any) => setSeeNames(e.target.checked)}
+                  />
+                </div>
+              </div>
               <Table
                 aria-label="Example static collection table w-full"
                 bottomContent={
@@ -109,18 +143,32 @@ export default function TransactionsTable({
                               : ''
                           }
                         >
-                          <Tooltip
-                            color="foreground"
-                            showArrow={true}
-                            content={elem.from}
-                          >
-                            <Link
-                              href={`/wallet-details/${elem.from}`}
-                              className="text-current cursor-pointer hover:underline w-fit"
+                          {getName(elem.from) && seeNames ? (
+                            <Chip
+                              size="sm"
+                              color={
+                                elem.from.toLocaleLowerCase() ==
+                                address.toLocaleLowerCase()
+                                  ? 'secondary'
+                                  : 'default'
+                              }
                             >
-                              {reduceWalletAddress(elem.from)}
-                            </Link>
-                          </Tooltip>
+                              {getName(elem.from)}
+                            </Chip>
+                          ) : (
+                            <Tooltip
+                              color="foreground"
+                              showArrow={true}
+                              content={elem.from}
+                            >
+                              <Link
+                                href={`/wallet-details/${elem.from}`}
+                                className="text-current cursor-pointer hover:underline w-fit"
+                              >
+                                {reduceWalletAddress(elem.from)}
+                              </Link>
+                            </Tooltip>
+                          )}
                         </TableCell>
                         <TableCell
                           className={
@@ -130,18 +178,32 @@ export default function TransactionsTable({
                               : ''
                           }
                         >
-                          <Tooltip
-                            color="foreground"
-                            showArrow={true}
-                            content={elem.to}
-                          >
-                            <Link
-                              href={`/wallet-details/${elem.to}`}
-                              className="text-current cursor-pointer hover:underline w-fit"
+                          {getName(elem.to) && seeNames ? (
+                            <Chip
+                              size="sm"
+                              color={
+                                elem.to.toLocaleLowerCase() ==
+                                address.toLocaleLowerCase()
+                                  ? 'secondary'
+                                  : 'default'
+                              }
                             >
-                              {reduceWalletAddress(elem.to)}
-                            </Link>
-                          </Tooltip>
+                              {getName(elem.to)}
+                            </Chip>
+                          ) : (
+                            <Tooltip
+                              color="foreground"
+                              showArrow={true}
+                              content={elem.to}
+                            >
+                              <Link
+                                href={`/wallet-details/${elem.to}`}
+                                className="text-current cursor-pointer hover:underline w-fit"
+                              >
+                                {reduceWalletAddress(elem.to)}
+                              </Link>
+                            </Tooltip>
+                          )}
                         </TableCell>
                         <TableCell>
                           <div className="flex justify-start items-center gap-1">
