@@ -23,7 +23,6 @@ import {
 } from '@nextui-org/react';
 
 import useSWR from 'swr';
-import TransactionsTableSkeleton from './TransactionsTableSkeleton';
 import { useState } from 'react';
 import ChevronLeft from '@/components/icons/ChevronLeft';
 import ChevronRight from '@/components/icons/ChevronRight';
