@@ -47,6 +47,29 @@ export type Database = {
           },
         ];
       };
+      users: {
+        Row: {
+          email: string;
+          id: string;
+        };
+        Insert: {
+          email: string;
+          id: string;
+        };
+        Update: {
+          email?: string;
+          id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'public_users_id_fkey';
+            columns: ['id'];
+            isOneToOne: true;
+            referencedRelation: 'users';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
     };
     Views: {
       [_ in never]: never;
