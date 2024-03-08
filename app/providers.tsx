@@ -4,11 +4,15 @@ import { NextUIProvider } from '@nextui-org/react';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import { FC, ReactNode, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
+import { Toaster } from 'react-hot-toast';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <SupabaseProvider>
-      <NextUIProvider>{children}</NextUIProvider>
+      <NextUIProvider>
+        {children}
+        <Toaster position="bottom-center" />
+      </NextUIProvider>
     </SupabaseProvider>
   );
 }

@@ -6,6 +6,7 @@ import { getQuotes } from '@/lib/coin_market';
 import Link from 'next/link';
 import Buttons from './Buttons';
 import { Tables } from '@/types_db';
+import BellIcon from '../icons/BellIcon';
 
 export default async function AccountCard({
   className = '',
@@ -32,7 +33,17 @@ export default async function AccountCard({
         <CardHeader className="flex gap-3">
           <Avatar name={name} color="secondary" className="size-10 flex-none" />
           <div className="flex flex-col truncate">
-            <p>{name}</p>
+            <div className="flex items-center gap-1">
+              {name}
+              {alert_enabled && (
+                <span title="Alert enabled">
+                  <BellIcon
+                    className="size-3 text-default-600"
+                    fill="currentColor"
+                  />
+                </span>
+              )}
+            </div>
             <p className="text-small truncate text-default-500">{address}</p>
           </div>
 
@@ -42,8 +53,8 @@ export default async function AccountCard({
         <Divider />
 
         <CardBody>
-          <span className="flex items-center gap-1">
-            <EthereumIcon className="h-4 w-4" />
+          <span className="flex items-center gap-1 text-default-700">
+            <EthereumIcon className="size-4" />
             {balance} (
             {balance !== undefined &&
               getCurrencyValue(price * balance).replace(/,/g, ' ')}

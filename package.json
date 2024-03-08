@@ -21,10 +21,13 @@
     "@supabase/auth-ui-shared": "^0.1.6",
     "@supabase/ssr": "^0.1.0",
     "@supabase/supabase-js": "^2.37.0",
+    "bignumber.js": "^9.1.2",
     "framer-motion": "^11.0.6",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-hot-toast": "^2.4.1",
+    "resend": "^3.2.0",
     "swr": "^2.2.5"
   },
   "devDependencies": {

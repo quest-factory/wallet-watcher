@@ -12,6 +12,8 @@ import EllipsisIcon from '../icons/EllipsisIcon';
 import { removeAddresses, updateAlert } from '@/actions/addresses';
 import BellSlashIcon from '../icons/BellSlashIcon';
 import { Tables } from '@/types_db';
+import toast from 'react-hot-toast';
+import { handleToast } from '@/lib/toast';
 
 export default function Buttons({
   className,
@@ -23,6 +25,33 @@ export default function Buttons({
   alert_enabled: Tables<'addresses'>['alert_enabled'];
 }) {
   const iconClasses = 'size-4 opacity-60';
+
+  async function handleUpdateAlert(alert_enabled: boolean) {
+    const toastId = toast.loading('Loading...');
+    const { status, statusText } = await updateAlert({
+      id: addressId,
+      alert_enabled,
+    });
+
+    handleToast({
+      toastId,
+      validStatus: 200,
+      status,
+      statusText,
+    });
+  }
+
+  async function handleRemove() {
+    const toastId = toast.loading('Loading...');
+    const response = await removeAddresses(addressId);
+
+    handleToast({
+      toastId,
+      validStatus: 204,
+      status: response?.status,
+      statusText: response?.statusText,
+    });
+  }
 
   return (
     <Dropdown className={className}>
@@ -42,7 +71,7 @@ export default function Buttons({
           <DropdownItem
             key="disable_alert"
             startContent={<BellSlashIcon className={iconClasses} />}
-            onPress={() => updateAlert({ id: addressId, alert_enabled: false })}
+            onPress={() => handleUpdateAlert(false)}
           >
             Disable alert
           </DropdownItem>
@@ -50,7 +79,7 @@ export default function Buttons({
           <DropdownItem
             key="enable_alert"
             startContent={<BellIcon className={iconClasses} />}
-            onPress={() => updateAlert({ id: addressId, alert_enabled: true })}
+            onPress={() => handleUpdateAlert(true)}
           >
             Enable alert
           </DropdownItem>
@@ -61,7 +90,7 @@ export default function Buttons({
           className="text-danger"
           color="danger"
           startContent={<TrashIcon className={`${iconClasses} text-danger`} />}
-          onPress={() => removeAddresses(addressId)}
+          onPress={handleRemove}
         >
           Remove account
         </DropdownItem>
