@@ -164,6 +164,7 @@ export default function TransactionsTable({
                       color="foreground"
                       showArrow={true}
                       content={elem.from}
+                      closeDelay={0}
                     >
                       {getName(elem.from) && seeNames ? (
                         <Link
@@ -193,6 +194,7 @@ export default function TransactionsTable({
                       color="foreground"
                       showArrow={true}
                       content={elem.to}
+                      closeDelay={0}
                     >
                       {getName(elem.to) && seeNames ? (
                         <Link
