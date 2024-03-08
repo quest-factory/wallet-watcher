@@ -160,32 +160,27 @@ export default function TransactionsTable({
                         : ''
                     }
                   >
-                    {getName(elem.from) && seeNames ? (
-                      <Chip
-                        size="sm"
-                        color={
-                          elem.from.toLocaleLowerCase() ==
-                          address.toLocaleLowerCase()
-                            ? 'secondary'
-                            : 'default'
-                        }
-                      >
-                        {getName(elem.from)}
-                      </Chip>
-                    ) : (
-                      <Tooltip
-                        color="foreground"
-                        showArrow={true}
-                        content={elem.from}
-                      >
+                    <Tooltip
+                      color="foreground"
+                      showArrow={true}
+                      content={elem.from}
+                    >
+                      {getName(elem.from) && seeNames ? (
+                        <Link
+                          className={`text-current cursor-pointer hover:underline w-fit font-bold ${elem.from.toLocaleLowerCase() == address.toLocaleLowerCase() && 'text-secondary'}`}
+                          href={`/wallet-details/${elem.from}`}
+                        >
+                          {getName(elem.from)}
+                        </Link>
+                      ) : (
                         <Link
                           href={`/wallet-details/${elem.from}`}
                           className="text-current cursor-pointer hover:underline w-fit"
                         >
                           {reduceWalletAddress(elem.from)}
                         </Link>
-                      </Tooltip>
-                    )}
+                      )}
+                    </Tooltip>
                   </TableCell>
                   <TableCell
                     className={
@@ -194,32 +189,27 @@ export default function TransactionsTable({
                         : ''
                     }
                   >
-                    {getName(elem.to) && seeNames ? (
-                      <Chip
-                        size="sm"
-                        color={
-                          elem.to.toLocaleLowerCase() ==
-                          address.toLocaleLowerCase()
-                            ? 'secondary'
-                            : 'default'
-                        }
-                      >
-                        {getName(elem.to)}
-                      </Chip>
-                    ) : (
-                      <Tooltip
-                        color="foreground"
-                        showArrow={true}
-                        content={elem.to}
-                      >
+                    <Tooltip
+                      color="foreground"
+                      showArrow={true}
+                      content={elem.to}
+                    >
+                      {getName(elem.to) && seeNames ? (
+                        <Link
+                          className={`text-current cursor-pointer hover:underline w-fit font-bold ${elem.to.toLocaleLowerCase() == address.toLocaleLowerCase() && 'text-secondary'}`}
+                          href={`/wallet-details/${elem.to}`}
+                        >
+                          {getName(elem.to)}
+                        </Link>
+                      ) : (
                         <Link
                           href={`/wallet-details/${elem.to}`}
                           className="text-current cursor-pointer hover:underline w-fit"
                         >
                           {reduceWalletAddress(elem.to)}
                         </Link>
-                      </Tooltip>
-                    )}
+                      )}
+                    </Tooltip>
                   </TableCell>
                   <TableCell>
                     <div className="flex justify-start items-center gap-1">
