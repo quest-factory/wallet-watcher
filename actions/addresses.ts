@@ -29,7 +29,7 @@ export async function addAddresses({
   const supabase = createClient(cookies());
   const user = await checkUser(supabase);
 
-  const { statusText, error } = await supabase
+  const { statusText, error, status } = await supabase
     .from('addresses')
     .insert({ address, name, user_id: user.id });
 
@@ -38,7 +38,7 @@ export async function addAddresses({
   }
 
   revalidatePath('/');
-  return statusText;
+  return { statusText, status };
 }
 
 export async function addAddressesSubmit(_: any, formData: FormData) {
@@ -49,8 +49,8 @@ export async function addAddressesSubmit(_: any, formData: FormData) {
     return;
   }
 
-  const statusText = await addAddresses({ address, name });
-  return { message: statusText };
+  const { statusText, status } = await addAddresses({ address, name });
+  return { statusText, status };
 }
 
 export async function removeAddresses(id: number) {

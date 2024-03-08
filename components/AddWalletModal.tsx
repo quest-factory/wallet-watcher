@@ -13,6 +13,8 @@ import {
 import { addAddressesSubmit } from '@/actions/addresses';
 import { useFormState, useFormStatus } from 'react-dom';
 import { useEffect } from 'react';
+import { handleToast } from '@/lib/toast';
+import toast from 'react-hot-toast';
 
 interface AddWalletModalProps {
   addressPreset?: string;
@@ -26,13 +28,26 @@ export default function AddWalletModal({
   customText,
 }: AddWalletModalProps) {
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
-  const [state, formAction] = useFormState(addAddressesSubmit, { message: '' });
+  const [state, formAction] = useFormState(
+    async (_: any, formData: FormData) => {
+      const toastId = toast.loading('Loading...');
+      const response = await addAddressesSubmit(_, formData);
+      handleToast({
+        toastId,
+        status: response?.status,
+        statusText: response?.statusText,
+        validStatus: 201,
+      });
+      return response;
+    },
+    { statusText: '', status: 0 }
+  );
 
   useEffect(() => {
-    if (state?.message === 'Created' && isOpen) {
+    if (state?.statusText === 'Created' && isOpen) {
       onClose();
     }
-  }, [state?.message]);
+  }, [state?.statusText]);
 
   return (
     <>
