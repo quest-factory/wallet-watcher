@@ -150,7 +150,7 @@ export default function TransactionsTable({
               )
               .map((elem: any, index: any) => (
                 <TableRow key={index}>
-                  <TableCell>{index + 20 * pageIndex}</TableCell>
+                  <TableCell>{index + 20 * (pageIndex - 1)}</TableCell>
                   <TableCell>{timeStampToDate(elem.timeStamp)}</TableCell>
                   <TableCell
                     className={
