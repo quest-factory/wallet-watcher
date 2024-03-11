@@ -44,7 +44,9 @@ export default async function AccountCard({
                 </span>
               )}
             </div>
-            <p className="text-small truncate text-default-500">{address}</p>
+            <p title={address} className="text-small truncate text-default-500">
+              {address}
+            </p>
           </div>
 
           <Buttons addressId={id} alert_enabled={alert_enabled} />
@@ -53,13 +55,17 @@ export default async function AccountCard({
         <Divider />
 
         <CardBody>
-          <span className="flex items-center gap-1 text-default-700">
+          <div className="flex items-center gap-1 text-default-700">
             <EthereumIcon className="size-4" />
-            {balance} (
-            {balance !== undefined &&
-              getCurrencyValue(price * balance).replace(/,/g, ' ')}
-            )
-          </span>
+            <div className="flex flex-row flex-wrap">
+              <span className="mr-2">{balance}</span>
+              <span className="text-default-500">
+                ~
+                {balance !== undefined &&
+                  getCurrencyValue(price * balance).replace(/,/g, ' ')}
+              </span>
+            </div>
+          </div>
         </CardBody>
       </Link>
     </Card>
