@@ -28,8 +28,8 @@ export default async function AccountCard({
   const price = quotes?.data.ETH[0]?.quote?.USD?.price || 0;
 
   return (
-    <Link href={`/wallet-details/${address}`}>
-      <Card className={`${className} max-w-96 group`}>
+    <Card className={`${className}`} fullWidth>
+      <Link className="w-full" href={`/wallet-details/${address}`}>
         <CardHeader className="flex gap-3">
           <Avatar name={name} color="secondary" className="size-10 flex-none" />
           <div className="flex flex-col truncate">
@@ -61,7 +61,7 @@ export default async function AccountCard({
             )
           </span>
         </CardBody>
-      </Card>
-    </Link>
+      </Link>
+    </Card>
   );
 }
