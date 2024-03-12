@@ -31,11 +31,13 @@ const fetcher = (url: string) => fetch(url).then((r) => r.json());
 interface TransactionsTableProps {
   address: string;
   wallets: any;
+  className: string;
 }
 
 export default function TransactionsTable({
   address,
   wallets,
+  className,
 }: TransactionsTableProps) {
   const [pageIndex, setPageIndex] = useState(1);
   const [seeNames, setSeeNames] = useState<boolean>(true);
@@ -73,7 +75,7 @@ export default function TransactionsTable({
   };
 
   return (
-    <>
+    <div className={className}>
       <div className="flex justify-between items-center md:flex-row flex-col">
         <div className="w-1/3" />
         <p className="font-bold text-center md:w-1/3 w-full">
@@ -231,6 +233,6 @@ export default function TransactionsTable({
               ))}
         </TableBody>
       </Table>
-    </>
+    </div>
   );
 }
