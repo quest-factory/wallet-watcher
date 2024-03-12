@@ -60,9 +60,7 @@ export default async function AccountCard({
             <div className="flex flex-row flex-wrap">
               <span className="mr-2">{balance}</span>
               <span className="text-default-500">
-                ~
-                {balance !== undefined &&
-                  getCurrencyValue(price * balance).replace(/,/g, ' ')}
+                ~{balance !== undefined && getCurrencyValue(price * balance)}
               </span>
             </div>
           </div>

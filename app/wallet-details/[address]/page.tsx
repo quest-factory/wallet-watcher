@@ -1,11 +1,4 @@
-import {
-  Badge,
-  Button,
-  Card,
-  CardBody,
-  Chip,
-  Snippet,
-} from '@nextui-org/react';
+import { Card, CardBody, Snippet } from '@nextui-org/react';
 import TransactionsTable from './component/TransactionTable';
 import { Suspense } from 'react';
 import BalanceSnippet from './component/BalanceSnippet';
@@ -35,8 +28,8 @@ export default async function WalletDetails({
     <main className="w-full mx-auto max-w-[80%] my-10">
       <section className="space-y-12 flex flex-col items-center">
         <div className="flex w-full justify-between px-5">
-          <h3 className="w-full flex flex-col items-center justify-center">
-            <p>Wallet details</p>
+          <div className="w-full flex flex-col items-center justify-center">
+            <h1 className="text-center">Wallet details</h1>
             <div className="flex gap-5 justify-center items-center">
               {getCurrentWallet().length > 0 ? (
                 <>
@@ -61,19 +54,23 @@ export default async function WalletDetails({
                 </Card>
               )}
             </div>
-          </h3>
+          </div>
         </div>
-        <div className="flex w-full md:flex-row flex-col justify-center gap-5 overflow-hidden overflow-ellipsis whitespace-nowrap">
+
+        <div className="flex w-full md:flex-row flex-col justify-center gap-5">
           <div className="flex flex-col justify-items-center w-full text-center">
             <p className="font-bold">Address</p>
             <Snippet
               hideSymbol
               variant="bordered"
-              className="bg-white h-12 text-secondary"
+              className="bg-white text-secondary"
+              classNames={{ pre: 'truncate' }}
+              size="lg"
             >
               {params.address}
             </Snippet>
           </div>
+
           <div className="flex flex-col justify-items-center w-full text-center">
             <Suspense fallback={<BalanceSnippetSkeleton />}>
               <BalanceSnippet address={params.address} />
