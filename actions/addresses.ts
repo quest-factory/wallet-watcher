@@ -6,6 +6,7 @@ import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { SupabaseClient } from '@supabase/supabase-js';
+import { getBalance } from '@/lib/infura';
 
 async function checkUser(supabase: SupabaseClient) {
   const {
@@ -22,16 +23,18 @@ async function checkUser(supabase: SupabaseClient) {
 export async function addAddresses({
   address,
   name,
+  balance,
 }: {
   address: Tables<'addresses'>['address'];
   name: Tables<'addresses'>['name'];
+  balance?: Tables<'addresses'>['balance'];
 }) {
   const supabase = createClient(cookies());
   const user = await checkUser(supabase);
 
   const { statusText, error, status } = await supabase
     .from('addresses')
-    .insert({ address, name, user_id: user.id });
+    .insert({ address, name, user_id: user.id, balance });
 
   if (error) {
     console.error(error.message);
@@ -49,7 +52,8 @@ export async function addAddressesSubmit(_: any, formData: FormData) {
     return;
   }
 
-  const { statusText, status } = await addAddresses({ address, name });
+  const balance = (await getBalance(address)) || 0;
+  const { statusText, status } = await addAddresses({ address, name, balance });
   return { statusText, status };
 }
 
