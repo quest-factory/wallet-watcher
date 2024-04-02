@@ -10,7 +10,6 @@ import {
   Button,
   Chip,
   Link,
-  Skeleton,
   Spinner,
   Switch,
   Table,
@@ -23,26 +22,37 @@ import {
 } from '@nextui-org/react';
 
 import useSWR from 'swr';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import ChevronLeft from '@/components/icons/ChevronLeft';
 import ChevronRight from '@/components/icons/ChevronRight';
+import { Transaction } from '@/types';
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 interface TransactionsTableProps {
   address: string;
   wallets: any;
+  className: string;
 }
 
 export default function TransactionsTable({
   address,
   wallets,
+  className,
 }: TransactionsTableProps) {
   const [pageIndex, setPageIndex] = useState(1);
   const [seeNames, setSeeNames] = useState<boolean>(true);
 
-  const { data: transactions, isLoading } = useSWR(
-    `/api/transactions/${address}/${pageIndex}`,
-    fetcher
+  const { data: transactions, isLoading } = useSWR<{
+    status: string;
+    message: string;
+    result: Transaction[];
+  }>(`/api/transactions/${address}/${pageIndex}`, fetcher);
+  const sortedTransactions = useMemo(
+    () =>
+      transactions?.result.sort(
+        (a, b) => parseInt(b.timeStamp) - parseInt(a.timeStamp)
+      ) || [],
+    [transactions?.result]
   );
 
   const getName = (currentAddress: string) => {
@@ -73,7 +83,7 @@ export default function TransactionsTable({
   };
 
   return (
-    <>
+    <div className={className}>
       <div className="flex justify-between items-center md:flex-row flex-col">
         <div className="w-1/3" />
         <p className="font-bold text-center md:w-1/3 w-full">
@@ -143,86 +153,89 @@ export default function TransactionsTable({
           }
         >
           {hasTransactions(transactions) &&
-            transactions.result
-              .sort(
-                (a: any, b: any) =>
-                  parseInt(b.timeStamp) - parseInt(a.timeStamp)
-              )
-              .map((elem: any, index: any) => (
-                <TableRow key={index}>
-                  <TableCell>{index + 20 * (pageIndex - 1)}</TableCell>
-                  <TableCell>{timeStampToDate(elem.timeStamp)}</TableCell>
-                  <TableCell
-                    className={
-                      elem.from.toLocaleLowerCase() ==
-                      address.toLocaleLowerCase()
-                        ? 'text-secondary font-bold'
-                        : ''
-                    }
-                  >
+            transactions &&
+            sortedTransactions.map((elem, index) => (
+              <TableRow key={index}>
+                <TableCell>{index + 1 + (pageIndex - 1) * 20}</TableCell>
+                <TableCell>{timeStampToDate(elem.timeStamp)}</TableCell>
+                <TableCell
+                  className={
+                    elem.from.toLocaleLowerCase() == address.toLocaleLowerCase()
+                      ? 'text-secondary font-bold'
+                      : ''
+                  }
+                >
+                  {getName(elem.from) && seeNames ? (
+                    <Chip
+                      size="sm"
+                      color={
+                        elem.from.toLocaleLowerCase() ==
+                        address.toLocaleLowerCase()
+                          ? 'secondary'
+                          : 'default'
+                      }
+                    >
+                      {getName(elem.from)}
+                    </Chip>
+                  ) : (
                     <Tooltip
                       color="foreground"
                       showArrow={true}
                       content={elem.from}
-                      closeDelay={0}
                     >
-                      {getName(elem.from) && seeNames ? (
-                        <Link
-                          className={`text-current cursor-pointer hover:underline w-fit font-bold ${elem.from.toLocaleLowerCase() == address.toLocaleLowerCase() && 'text-secondary'}`}
-                          href={`/wallet-details/${elem.from}`}
-                        >
-                          {getName(elem.from)}
-                        </Link>
-                      ) : (
-                        <Link
-                          href={`/wallet-details/${elem.from}`}
-                          className="text-current cursor-pointer hover:underline w-fit"
-                        >
-                          {reduceWalletAddress(elem.from)}
-                        </Link>
-                      )}
+                      <Link
+                        href={`/wallet-details/${elem.from}`}
+                        className="text-current cursor-pointer hover:underline w-fit"
+                      >
+                        {reduceWalletAddress(elem.from)}
+                      </Link>
                     </Tooltip>
-                  </TableCell>
-                  <TableCell
-                    className={
-                      elem.to.toLocaleLowerCase() == address.toLocaleLowerCase()
-                        ? 'text-secondary font-bold'
-                        : ''
-                    }
-                  >
+                  )}
+                </TableCell>
+                <TableCell
+                  className={
+                    elem.to.toLocaleLowerCase() == address.toLocaleLowerCase()
+                      ? 'text-secondary font-bold'
+                      : ''
+                  }
+                >
+                  {getName(elem.to) && seeNames ? (
+                    <Chip
+                      size="sm"
+                      color={
+                        elem.to.toLocaleLowerCase() ==
+                        address.toLocaleLowerCase()
+                          ? 'secondary'
+                          : 'default'
+                      }
+                    >
+                      {getName(elem.to)}
+                    </Chip>
+                  ) : (
                     <Tooltip
                       color="foreground"
                       showArrow={true}
                       content={elem.to}
-                      closeDelay={0}
                     >
-                      {getName(elem.to) && seeNames ? (
-                        <Link
-                          className={`text-current cursor-pointer hover:underline w-fit font-bold ${elem.to.toLocaleLowerCase() == address.toLocaleLowerCase() && 'text-secondary'}`}
-                          href={`/wallet-details/${elem.to}`}
-                        >
-                          {getName(elem.to)}
-                        </Link>
-                      ) : (
-                        <Link
-                          href={`/wallet-details/${elem.to}`}
-                          className="text-current cursor-pointer hover:underline w-fit"
-                        >
-                          {reduceWalletAddress(elem.to)}
-                        </Link>
-                      )}
+                      <Link
+                        href={`/wallet-details/${elem.to}`}
+                        className="text-current cursor-pointer hover:underline w-fit"
+                      >
+                        {reduceWalletAddress(elem.to)}
+                      </Link>
                     </Tooltip>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex justify-start items-center gap-1">
-                      <EthereumIcon className="h-4 w-4" />
-                      {strWeiToStrEth(elem.value)}
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
+                  )}
+                </TableCell>
+                <TableCell>
+                  <div className="flex justify-start items-center gap-1">
+                    <EthereumIcon className="h-4 w-4" />
+                    {strWeiToStrEth(elem.value)}
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
-    </>
+    </div>
   );
 }

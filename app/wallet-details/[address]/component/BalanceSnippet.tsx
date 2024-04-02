@@ -9,24 +9,32 @@ interface BalanceSnippetProps {
 }
 
 export default async function BalanceSnippet({ address }: BalanceSnippetProps) {
-  const balance = await getBalance(address);
-  const quotes = await getQuotes('ETH');
+  const [balance, quotes] = await Promise.all([
+    getBalance(address),
+    getQuotes('ETH'),
+  ]);
   const price = quotes?.data.ETH[0]?.quote?.USD?.price || 0;
 
   return (
-    <>
-      <p className="font-bold">Balance</p>
+    <div>
+      <p className="font-bold text-center">Balance</p>
       <Snippet
         hideSymbol
         hideCopyButton
         variant="bordered"
-        className="bg-white h-12"
+        className="bg-white"
+        classNames={{
+          pre: 'truncate',
+          content: 'flex-row items-center gap-1 truncate',
+        }}
+        size="lg"
       >
-        <div className="flex justify-center items-center gap-1 text-gray-600">
-          <EthereumIcon className="h-4 w-4" />
-          {`${balance} (${balance !== undefined && getCurrencyValue(price * balance).replace(/,/g, ' ')})`}
-        </div>
+        <EthereumIcon className="size-4" />
+        <span>{balance}</span>
+        <span className="text-default-500">
+          ~{balance !== undefined && getCurrencyValue(price * balance)}
+        </span>
       </Snippet>
-    </>
+    </div>
   );
 }

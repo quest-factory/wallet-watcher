@@ -44,16 +44,6 @@ export const reduceWalletAddress = (address: string) => {
 };
 
 export const timeStampToDate = (timeStamp: string) => {
-  const dateFormat = new Date(parseInt(timeStamp) * 1000);
-
-  const day = dateFormat.getDate().toString().padStart(2, '0');
-  const month = (dateFormat.getMonth() + 1).toString().padStart(2, '0');
-  const year = dateFormat.getFullYear();
-
-  const hours = dateFormat.getHours();
-  const min = dateFormat.getMinutes();
-
-  const dateString = `${day}/${month}/${year} ${hours}:${min}`;
-
-  return dateString;
+  const date = new Date(parseInt(timeStamp) * 1000);
+  return date.toLocaleString('fr-FR');
 };
