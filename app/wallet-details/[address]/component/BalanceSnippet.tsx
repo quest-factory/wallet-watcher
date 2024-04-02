@@ -16,8 +16,8 @@ export default async function BalanceSnippet({ address }: BalanceSnippetProps) {
   const price = quotes?.data.ETH[0]?.quote?.USD?.price || 0;
 
   return (
-    <>
-      <p className="font-bold">Balance</p>
+    <div>
+      <p className="font-bold text-center">Balance</p>
       <Snippet
         hideSymbol
         hideCopyButton
@@ -35,6 +35,6 @@ export default async function BalanceSnippet({ address }: BalanceSnippetProps) {
           ~{balance !== undefined && getCurrencyValue(price * balance)}
         </span>
       </Snippet>
-    </>
+    </div>
   );
 }

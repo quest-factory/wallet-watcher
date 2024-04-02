@@ -48,9 +48,9 @@ export default async function WalletDetails({
           </div>
         </div>
 
-        <div className="flex w-full flex-row flex-wrap justify-center gap-7">
-          <div className="flex flex-col justify-items-center text-center">
-            <p className="font-bold">Address</p>
+        <div className="flex flex-row flex-wrap justify-center gap-7">
+          <div>
+            <p className="font-bold text-center">Address</p>
             <Snippet
               hideSymbol
               variant="bordered"
@@ -62,11 +62,9 @@ export default async function WalletDetails({
             </Snippet>
           </div>
 
-          <div className="flex flex-col justify-items-center text-center">
-            <Suspense fallback={<BalanceSnippetSkeleton />}>
-              <BalanceSnippet address={params.address} />
-            </Suspense>
-          </div>
+          <Suspense fallback={<BalanceSnippetSkeleton />}>
+            <BalanceSnippet address={params.address} />
+          </Suspense>
         </div>
       </section>
 
