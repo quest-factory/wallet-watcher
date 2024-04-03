@@ -41,8 +41,8 @@ export async function getEdges(): Promise<CompanyEdge[]> {
   const edges =
     data?.map(({ id, source, target, label }) => ({
       id: id.toString(),
-      source: source.toString(),
-      target: target.toString(),
+      source,
+      target,
       data: {
         label,
       },

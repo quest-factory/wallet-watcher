@@ -49,22 +49,22 @@ export type Database = {
       };
       edges: {
         Row: {
-          id: number;
-          label: string | null;
-          source: number;
-          target: number;
+          id: string;
+          label: string;
+          source: string;
+          target: string;
         };
         Insert: {
-          id?: number;
-          label?: string | null;
-          source: number;
-          target: number;
+          id?: string;
+          label?: string;
+          source?: string;
+          target?: string;
         };
         Update: {
-          id?: number;
-          label?: string | null;
-          source?: number;
-          target?: number;
+          id?: string;
+          label?: string;
+          source?: string;
+          target?: string;
         };
         Relationships: [
           {
@@ -86,23 +86,23 @@ export type Database = {
       nodes: {
         Row: {
           address: string | null;
-          id: number;
-          name: string | null;
-          position: Json | null;
+          id: string;
+          name: string;
+          position: Json;
           siren: string | null;
         };
         Insert: {
           address?: string | null;
-          id?: number;
-          name?: string | null;
-          position?: Json | null;
+          id?: string;
+          name?: string;
+          position?: Json;
           siren?: string | null;
         };
         Update: {
           address?: string | null;
-          id?: number;
-          name?: string | null;
-          position?: Json | null;
+          id?: string;
+          name?: string;
+          position?: Json;
           siren?: string | null;
         };
         Relationships: [];
