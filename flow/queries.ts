@@ -1,14 +1,8 @@
 import { cookies } from 'next/headers';
-import { createClient } from './supabase/server';
-import { Edge, Node, XYPosition } from 'reactflow';
-import { Tables } from '@/types_db';
+import { XYPosition } from 'reactflow';
+import { createClient } from '@/lib/supabase/server';
+import { CompanyEdge, CompanyNode } from './types';
 
-// ################################################# NODES
-type CompanyNode = Node<{
-  name: Tables<'nodes'>['name'];
-  siren: Tables<'nodes'>['siren'];
-  address: Tables<'nodes'>['address'];
-}>;
 export async function getNodes(): Promise<CompanyNode[]> {
   const supabase = createClient(cookies());
   const { data, error } = await supabase.from('nodes').select('*');
@@ -36,11 +30,6 @@ export async function getNodes(): Promise<CompanyNode[]> {
   return nodes;
 }
 
-// ################################################# EDGES
-type CompanyEdge = Edge<{
-  label: Tables<'edges'>['label'];
-  // address: CompanyNode['data']['address'];
-}>;
 export async function getEdges(): Promise<CompanyEdge[]> {
   const supabase = createClient(cookies());
   const { data, error } = await supabase.from('edges').select('*');
