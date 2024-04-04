@@ -14,18 +14,13 @@ export async function getNodes(): Promise<CompanyNode[]> {
     console.error(error.message);
   }
 
-  const NODE_CONFIG = {
-    type: 'default',
-    connectable: false,
-    selectable: false,
-  };
   const nodes =
     data?.map(({ id, label, siren, address, ...node }) => {
       // @ts-ignore
       const position: XYPosition = node.position || { x: 0, y: 0 };
       return {
-        ...NODE_CONFIG,
         ...node,
+        type: 'default',
         id: id.toString(),
         position,
         data: {

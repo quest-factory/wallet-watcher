@@ -11,7 +11,7 @@ import ReactFlow, {
 import 'reactflow/dist/style.css';
 import { MouseEvent, useCallback } from 'react';
 import { CompanyEdge, CompanyNode } from '@/flow/types';
-import { updateNode } from '@/flow/action';
+import { createEdge, updateNode } from '@/flow/action';
 
 export default function Chart({
   initialNodes,
@@ -24,7 +24,15 @@ export default function Chart({
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect: OnConnect = useCallback(
-    (connection) => setEdges((edges) => addEdge(connection, edges)),
+    async (connection) => {
+      if (connection.source && connection.target) {
+        createEdge({
+          source: connection.source,
+          target: connection.target,
+        });
+        setEdges((edges) => addEdge(connection, edges));
+      }
+    },
     [setEdges]
   );
 
