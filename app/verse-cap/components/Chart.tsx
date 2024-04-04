@@ -1,12 +1,12 @@
 'use client';
 
 import ReactFlow, {
-  addEdge,
-  MiniMap,
   Controls,
   Background,
   useNodesState,
   useEdgesState,
+  OnConnect,
+  addEdge,
 } from 'reactflow';
 
 import {
@@ -16,10 +16,7 @@ import {
 
 import 'reactflow/dist/style.css';
 import './overview.css';
-
-const minimapStyle = {
-  height: 120,
-};
+import { useCallback } from 'react';
 
 const onInit = (reactFlowInstance: any) =>
   console.log('flow loaded:', reactFlowInstance);
@@ -28,18 +25,22 @@ export default function Chart() {
   const [nodes, setNodes, onNodesChange] = useNodesState<any>(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState<any>(initialEdges);
 
+  const onConnect: OnConnect = useCallback(
+    (connection) => setEdges((edges) => addEdge(connection, edges)),
+    [setEdges]
+  );
+
   return (
     <ReactFlow
       nodes={nodes}
       edges={edges}
-      onNodesChange={() => console.log('NODES change')}
-      onEdgesChange={() => console.log('EDGES change')}
-      onConnect={() => console.log('CONNECT')}
+      onNodesChange={onNodesChange}
+      onEdgesChange={onEdgesChange}
+      onConnect={onConnect}
       onInit={onInit}
       fitView
       attributionPosition="top-right"
     >
-      <MiniMap style={minimapStyle} zoomable pannable />
       <Controls />
       <Background color="#aaa" gap={16} />
     </ReactFlow>
