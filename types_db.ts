@@ -87,21 +87,21 @@ export type Database = {
         Row: {
           address: string | null;
           id: string;
-          name: string;
+          label: string;
           position: Json;
           siren: string | null;
         };
         Insert: {
           address?: string | null;
           id?: string;
-          name?: string;
+          label?: string;
           position?: Json;
           siren?: string | null;
         };
         Update: {
           address?: string | null;
           id?: string;
-          name?: string;
+          label?: string;
           position?: Json;
           siren?: string | null;
         };

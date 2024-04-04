@@ -5,16 +5,16 @@ import { Tables } from '@/types_db';
 import { cookies } from 'next/headers';
 
 export async function handleSubmitNode(state: any, formData: FormData) {
-  const name = formData.get('name')?.toString();
+  const label = formData.get('label')?.toString();
   const siren = formData.get('siren')?.toString() || null;
   const address = formData.get('address')?.toString() || null;
   const edge_label = formData.get('edge_label')?.toString();
   const source = formData.get('source')?.toString();
   const target = formData.get('target')?.toString();
 
-  if (name)
+  if (label)
     await createNode({
-      name,
+      label,
       siren,
       address,
     });
@@ -25,18 +25,18 @@ export async function handleSubmitNode(state: any, formData: FormData) {
 }
 
 export async function createNode({
-  name,
+  label,
   siren,
   address,
 }: {
-  name: Tables<'nodes'>['name'];
+  label: Tables<'nodes'>['label'];
   siren: Tables<'nodes'>['siren'];
   address: Tables<'nodes'>['address'];
 }) {
   const supabase = createClient(cookies());
   const { error } = await supabase
     .from('nodes')
-    .insert({ name, siren, address });
+    .insert({ label, siren, address });
 
   if (error) {
     console.error(error.message);

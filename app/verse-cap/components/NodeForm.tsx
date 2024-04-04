@@ -2,8 +2,8 @@
 
 import { Button, Input, Select, SelectItem } from '@nextui-org/react';
 import { useFormState, useFormStatus } from 'react-dom';
-import { handleSubmitNode } from '../action';
-import { CompanyNode } from '../types';
+import { handleSubmitNode } from '../../../flow/action';
+import { CompanyNode } from '../../../flow/types';
 import { useMemo } from 'react';
 
 export default function NodeForm({ nodes }: { nodes: CompanyNode[] }) {
@@ -13,7 +13,7 @@ export default function NodeForm({ nodes }: { nodes: CompanyNode[] }) {
     n.unshift({
       id: 'null',
       position: { x: 0, y: 0 },
-      data: { name: ' - ', address: null, siren: null },
+      data: { label: ' - ', address: null, siren: null },
     });
     return n;
   }, [nodes]);
@@ -21,24 +21,24 @@ export default function NodeForm({ nodes }: { nodes: CompanyNode[] }) {
   return (
     <form className="max-w-80 space-y-5" action={formAction}>
       <p className="text-center">New node</p>
-      <Input type="text" label="Name" name="name" />
+      <Input type="text" label="Name" name="label" />
       <Input type="text" label="Siren" name="siren" />
       <Input type="text" label="Wallet address" name="address" />
 
       {/* EDGE */}
       <Input type="text" label="Edge label" name="edge_label" />
       <Select label="Source" name="source">
-        {nodeSelects.map(({ id, data: { name } }) => (
+        {nodeSelects.map(({ id, data: { label } }) => (
           <SelectItem key={id} value={id}>
-            {name}
+            {label}
           </SelectItem>
         ))}
       </Select>
 
       <Select label="Target" name="target">
-        {nodeSelects.map(({ id, data: { name } }) => (
+        {nodeSelects.map(({ id, data: { label } }) => (
           <SelectItem key={id} value={id}>
-            {name}
+            {label}
           </SelectItem>
         ))}
       </Select>
