@@ -2,8 +2,8 @@
 
 import { Button, Input, Select, SelectItem } from '@nextui-org/react';
 import { useFormState, useFormStatus } from 'react-dom';
-import { handleSubmitNode } from '../action';
-import { CompanyNode } from '../types';
+import { handleSubmitNode } from '../../../flow/action';
+import { CompanyNode } from '../../../flow/types';
 import { useMemo } from 'react';
 
 export default function NodeForm({ nodes }: { nodes: CompanyNode[] }) {
