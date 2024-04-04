@@ -63,3 +63,15 @@ export async function createEdge({
     console.error(error.message);
   }
 }
+
+export async function removeNode(id: Tables<'nodes'>['id']) {
+  const supabase = createClient(cookies());
+  const { error } = await supabase.from('nodes').delete().eq('id', id);
+  if (error) console.error(error.message);
+}
+
+export async function removeEdge(id: Tables<'edges'>['id']) {
+  const supabase = createClient(cookies());
+  const { error } = await supabase.from('edges').delete().eq('id', id);
+  if (error) console.error(error.message);
+}
