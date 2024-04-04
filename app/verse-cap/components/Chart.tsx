@@ -15,7 +15,6 @@ import {
 } from './initial-elements';
 
 import 'reactflow/dist/style.css';
-import './overview.css';
 import { useCallback } from 'react';
 
 const onInit = (reactFlowInstance: any) =>
