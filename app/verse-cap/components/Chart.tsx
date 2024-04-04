@@ -28,9 +28,12 @@ export default function Chart({
     [setEdges]
   );
 
-  async function handleNodeDragStop(_: MouseEvent, node: CompanyNode) {
-    await updateNode(node);
-  }
+  const handleNodeDragStop = useCallback(
+    async (_: MouseEvent, node: CompanyNode) => {
+      await updateNode(node);
+    },
+    []
+  );
 
   return (
     <ReactFlow
