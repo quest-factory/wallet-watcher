@@ -8,22 +8,28 @@ export async function getNodes(): Promise<CompanyNode[]> {
   const { data, error } = await supabase
     .from('nodes')
     .select('*')
-    .order('name', { ascending: true });
+    .order('label', { ascending: true });
 
   if (error) {
     console.error(error.message);
   }
 
+  const NODE_CONFIG = {
+    type: 'default',
+    connectable: false,
+    selectable: false,
+  };
   const nodes =
-    data?.map(({ id, name, siren, address, ...node }) => {
+    data?.map(({ id, label, siren, address, ...node }) => {
       // @ts-ignore
       const position: XYPosition = node.position || { x: 0, y: 0 };
       return {
+        ...NODE_CONFIG,
         ...node,
         id: id.toString(),
         position,
         data: {
-          name: name || '',
+          label,
           siren,
           address,
         },
@@ -43,6 +49,7 @@ export async function getEdges(): Promise<CompanyEdge[]> {
 
   const edges =
     data?.map(({ id, source, target, label }) => ({
+      type: 'smoothstep',
       id: id.toString(),
       source,
       target,

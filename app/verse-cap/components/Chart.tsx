@@ -8,22 +8,23 @@ import ReactFlow, {
   OnConnect,
   addEdge,
 } from 'reactflow';
-
-import {
-  nodes as initialNodes,
-  edges as initialEdges,
-} from './initial-elements';
-
 import 'reactflow/dist/style.css';
 import './overview.css';
 import { useCallback } from 'react';
+import { CompanyEdge, CompanyNode } from '@/flow/types';
 
 const onInit = (reactFlowInstance: any) =>
   console.log('flow loaded:', reactFlowInstance);
 
-export default function Chart() {
-  const [nodes, setNodes, onNodesChange] = useNodesState<any>(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState<any>(initialEdges);
+export default function Chart({
+  initialNodes,
+  initialEdges,
+}: {
+  initialNodes: CompanyNode[];
+  initialEdges: CompanyEdge[];
+}) {
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect: OnConnect = useCallback(
     (connection) => setEdges((edges) => addEdge(connection, edges)),
