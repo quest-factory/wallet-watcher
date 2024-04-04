@@ -2,7 +2,7 @@ import { Tables } from '@/types_db';
 import { Edge, Node } from 'reactflow';
 
 export type CompanyNode = Node<{
-  name: Tables<'nodes'>['name'];
+  label: Tables<'nodes'>['label'];
   siren: Tables<'nodes'>['siren'];
   address: Tables<'nodes'>['address'];
 }>;
