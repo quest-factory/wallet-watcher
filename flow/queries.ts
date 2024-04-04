@@ -5,7 +5,10 @@ import { CompanyEdge, CompanyNode } from './types';
 
 export async function getNodes(): Promise<CompanyNode[]> {
   const supabase = createClient(cookies());
-  const { data, error } = await supabase.from('nodes').select('*');
+  const { data, error } = await supabase
+    .from('nodes')
+    .select('*')
+    .order('name', { ascending: true });
 
   if (error) {
     console.error(error.message);
