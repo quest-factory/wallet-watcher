@@ -9,11 +9,9 @@ import ReactFlow, {
   addEdge,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-import { useCallback } from 'react';
+import { MouseEvent, useCallback } from 'react';
 import { CompanyEdge, CompanyNode } from '@/flow/types';
-
-const onInit = (reactFlowInstance: any) =>
-  console.log('flow loaded:', reactFlowInstance);
+import { updateNode } from '@/flow/action';
 
 export default function Chart({
   initialNodes,
@@ -30,6 +28,10 @@ export default function Chart({
     [setEdges]
   );
 
+  async function handleNodeDragStop(_: MouseEvent, node: CompanyNode) {
+    await updateNode(node);
+  }
+
   return (
     <ReactFlow
       nodes={nodes}
@@ -37,7 +39,7 @@ export default function Chart({
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
-      onInit={onInit}
+      onNodeDragStop={handleNodeDragStop}
       fitView
       attributionPosition="top-right"
     >
