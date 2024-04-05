@@ -12,7 +12,12 @@ import 'reactflow/dist/style.css';
 import { MouseEvent, useCallback } from 'react';
 import { CompanyEdge, CompanyNode } from '@/flow/types';
 import { createEdge, removeNode, updateNode } from '@/flow/action';
+import CustomNode from './CustomNode';
 import NodeModal from './NodeModal';
+
+const nodeTypes = {
+  custom: CustomNode,
+};
 
 export default function Chart({
   initialNodes,
@@ -60,6 +65,7 @@ export default function Chart({
       onNodesDelete={handleDeleteNode}
       fitView
       attributionPosition="top-right"
+      nodeTypes={nodeTypes}
     >
       <Controls>
         <NodeModal nodes={nodes} />
