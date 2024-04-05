@@ -19,15 +19,15 @@ export default function NodeForm({ nodes }: { nodes: CompanyNode[] }) {
   }, [nodes]);
 
   return (
-    <form className="max-w-80 space-y-5" action={formAction}>
-      <p className="text-center">New node</p>
-      <Input type="text" label="Name" name="label" />
-      <Input type="text" label="Siren" name="siren" />
-      <Input type="text" label="Wallet address" name="address" />
+    <form className="space-y-5" action={formAction}>
+      <p className="text-center text-2xl">Node</p>
+      <Input type="text" label="Name" name="label" size="sm" />
+      <Input type="text" label="Siren" name="siren" size="sm" />
+      <Input type="text" label="Wallet address" name="address" size="sm" />
 
-      {/* EDGE */}
-      <Input type="text" label="Edge label" name="edge_label" />
-      <Select label="Source" name="source">
+      <p className="text-center text-2xl">Edge</p>
+      <Input type="text" label="Edge label" name="edge_label" size="sm" />
+      <Select label="Source" name="source" size="sm">
         {nodeSelects.map(({ id, data: { label } }) => (
           <SelectItem key={id} value={id}>
             {label}
@@ -35,7 +35,7 @@ export default function NodeForm({ nodes }: { nodes: CompanyNode[] }) {
         ))}
       </Select>
 
-      <Select label="Target" name="target">
+      <Select label="Target" name="target" size="sm">
         {nodeSelects.map(({ id, data: { label } }) => (
           <SelectItem key={id} value={id}>
             {label}

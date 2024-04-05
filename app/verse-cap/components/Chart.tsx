@@ -7,13 +7,12 @@ import ReactFlow, {
   useEdgesState,
   OnConnect,
   addEdge,
-  ControlButton,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import { MouseEvent, useCallback } from 'react';
 import { CompanyEdge, CompanyNode } from '@/flow/types';
 import { createEdge, updateNode } from '@/flow/action';
-import CirclePlusIcon from '@/components/icons/CirclePlusIcon';
+import NodeModal from './NodeModal';
 
 export default function Chart({
   initialNodes,
@@ -57,11 +56,7 @@ export default function Chart({
       attributionPosition="top-right"
     >
       <Controls>
-        <ControlButton
-          onClick={() => alert('Something magical just happened. ✨')}
-        >
-          <CirclePlusIcon />
-        </ControlButton>
+        <NodeModal nodes={nodes} />
       </Controls>
       <Background color="#aaa" gap={16} />
     </ReactFlow>
