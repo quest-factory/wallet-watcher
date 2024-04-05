@@ -1,17 +1,21 @@
 import React, { memo } from 'react';
-import { Handle, Position } from 'reactflow';
+import { Handle, NodeProps, Position } from 'reactflow';
 import { Card, CardBody } from '@nextui-org/react';
+import { Company } from '@/flow/types';
 
-function CustomNode({ id, data }) {
+function CustomNode({
+  id,
+  data: { label, siren, address },
+}: NodeProps<Company>) {
   return (
     <>
       <Card>
         <CardBody className="text-xs flex flex-col justify-center items-center">
           <p className="text-medium w-full text-center text-secondary font-bold">
-            {data.label}
+            {label}
           </p>
-          <p>{data.siren}</p>
-          <p>{data.address}</p>
+          <p>{siren}</p>
+          <p>{address}</p>
         </CardBody>
       </Card>
       <Handle
