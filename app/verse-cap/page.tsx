@@ -1,4 +1,3 @@
-import NodeForm from '@/app/verse-cap/components/NodeForm';
 import { getEdges, getNodes } from '@/flow/queries';
 import Chart from './components/Chart';
 
@@ -10,7 +9,6 @@ export default async function verseCap() {
       className="w-screen border-2 border-red"
       style={{ height: 'calc(100vh - 65px)' }}
     >
-      {/* <NodeForm nodes={nodes} /> */}
       <Chart initialNodes={nodes} initialEdges={edges} />
     </main>
   );

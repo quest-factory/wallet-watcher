@@ -9,7 +9,7 @@ import ReactFlow, {
   addEdge,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
-import { useCallback } from 'react';
+import { MouseEvent, useCallback } from 'react';
 import { CompanyEdge, CompanyNode } from '@/flow/types';
 import CustomNode from './CustomNode';
 
@@ -19,6 +19,8 @@ const nodeTypes = {
 
 const onInit = (reactFlowInstance: any) =>
   console.log('flow loaded:', reactFlowInstance);
+import { createEdge, updateNode } from '@/flow/action';
+import NodeModal from './NodeModal';
 
 export default function Chart({
   initialNodes,
@@ -31,8 +33,23 @@ export default function Chart({
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect: OnConnect = useCallback(
-    (connection) => setEdges((edges) => addEdge(connection, edges)),
+    async (connection) => {
+      if (connection.source && connection.target) {
+        createEdge({
+          source: connection.source,
+          target: connection.target,
+        });
+        setEdges((edges) => addEdge(connection, edges));
+      }
+    },
     [setEdges]
+  );
+
+  const handleNodeDragStop = useCallback(
+    async (_: MouseEvent, node: CompanyNode) => {
+      await updateNode(node);
+    },
+    []
   );
 
   return (
@@ -42,12 +59,14 @@ export default function Chart({
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onConnect={onConnect}
-      onInit={onInit}
+      onNodeDragStop={handleNodeDragStop}
       fitView
       attributionPosition="top-right"
       nodeTypes={nodeTypes}
     >
-      <Controls />
+      <Controls>
+        <NodeModal nodes={nodes} />
+      </Controls>
       <Background color="#aaa" gap={16} />
     </ReactFlow>
   );
