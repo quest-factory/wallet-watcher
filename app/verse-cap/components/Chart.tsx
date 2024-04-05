@@ -11,6 +11,11 @@ import ReactFlow, {
 import 'reactflow/dist/style.css';
 import { useCallback } from 'react';
 import { CompanyEdge, CompanyNode } from '@/flow/types';
+import CustomNode from './CustomNode';
+
+const nodeTypes = {
+  custom: CustomNode,
+};
 
 const onInit = (reactFlowInstance: any) =>
   console.log('flow loaded:', reactFlowInstance);
@@ -40,6 +45,7 @@ export default function Chart({
       onInit={onInit}
       fitView
       attributionPosition="top-right"
+      nodeTypes={nodeTypes}
     >
       <Controls />
       <Background color="#aaa" gap={16} />
