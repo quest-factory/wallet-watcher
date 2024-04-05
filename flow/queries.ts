@@ -20,7 +20,7 @@ export async function getNodes(): Promise<CompanyNode[]> {
       const position: XYPosition = node.position || { x: 0, y: 0 };
       return {
         ...node,
-        type: 'default',
+        type: 'custom',
         id: id.toString(),
         position,
         data: {
