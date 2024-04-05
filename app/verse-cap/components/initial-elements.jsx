@@ -1,52 +1,53 @@
 export const nodes = [
   {
     id: '1',
+    type: 'custom',
+    position: { x: 0, y: 0 },
     data: {
-      label: 'BOSS',
+      label: 'Test company',
+      siren: '885 732 012',
+      address: '0x21728dd7bc8e643667331643dc5f7e300f351e72',
     },
-    position: { x: 250, y: 0 },
   },
   {
     id: '2',
+    type: 'custom',
+    position: { x: -200, y: 100 },
     data: {
-      label: 'LEFT',
+      label: 'Test company',
+      siren: '885 732 012',
+      address: '0x21728dd7bc8e643667331643dc5f7e300f351e72',
     },
-    position: { x: 100, y: 100 },
   },
   {
     id: '3',
+    type: 'custom',
+    position: { x: 200, y: 150 },
     data: {
-      label: 'RIGHT',
+      label: 'Test company',
+      siren: '885 732 012',
+      address: '0x21728dd7bc8e643667331643dc5f7e300f351e72',
     },
-    position: { x: 400, y: 100 },
   },
   {
     id: '4',
+    type: 'custom',
+    position: { x: -200, y: 200 },
     data: {
-      label: 'AA 20%',
+      label: 'Test company',
+      siren: '885 732 012',
+      address: '0x21728dd7bc8e643667331643dc5f7e300f351e72',
     },
-    position: { x: -25, y: 200 },
-  },
-  {
-    id: '5',
-    data: {
-      label: 'BB 20%',
-    },
-    position: { x: 225, y: 300 },
   },
   {
     id: '6',
+    type: 'custom',
+    position: { x: 200, y: 250 },
     data: {
-      label: 'CC 20%',
+      label: 'Test company',
+      siren: '885 732 012',
+      address: '0x21728dd7bc8e643667331643dc5f7e300f351e72',
     },
-    position: { x: 275, y: 200 },
-  },
-  {
-    id: '7',
-    data: {
-      label: 'CC 20%',
-    },
-    position: { x: 525, y: 200 },
   },
 ];
 
