@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { Handle, Position } from 'reactflow';
-import { Card, CardHeader, CardBody, Divider } from '@nextui-org/react';
+import { Card, CardBody } from '@nextui-org/react';
 
 function CustomNode({ id, data }) {
   return (
