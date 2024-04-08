@@ -10,14 +10,9 @@ import ReactFlow, {
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import { MouseEvent, useCallback } from 'react';
-import { CompanyEdge, CompanyNode } from '@/flow/types';
+import { CompanyEdge, CompanyNode, edgeTypes, nodeTypes } from '@/flow/types';
 import { createEdge, removeNode, updateNode } from '@/flow/action';
-import CustomNode from './CustomNode';
 import NodeModal from './NodeModal';
-
-const nodeTypes = {
-  custom: CustomNode,
-};
 
 export default function Chart({
   initialNodes,
@@ -26,7 +21,7 @@ export default function Chart({
   initialNodes: CompanyNode[];
   initialEdges: CompanyEdge[];
 }) {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [nodes, _, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect: OnConnect = useCallback(
@@ -66,6 +61,7 @@ export default function Chart({
       fitView
       attributionPosition="top-right"
       nodeTypes={nodeTypes}
+      edgeTypes={edgeTypes}
     >
       <Controls>
         <NodeModal nodes={nodes} />

@@ -44,7 +44,7 @@ export async function getEdges(): Promise<CompanyEdge[]> {
 
   const edges =
     data?.map(({ id, source, target, label }) => ({
-      type: 'smoothstep',
+      type: 'custom',
       id: id.toString(),
       source,
       target,
