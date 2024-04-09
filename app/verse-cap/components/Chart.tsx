@@ -11,7 +11,7 @@ import ReactFlow, {
 import 'reactflow/dist/style.css';
 import { MouseEvent, useCallback } from 'react';
 import { CompanyEdge, CompanyNode, edgeTypes, nodeTypes } from '@/flow/types';
-import { createEdge, removeNode, updateNode } from '@/flow/action';
+import { createEdge, removeEdge, removeNode, updateNode } from '@/flow/action';
 import NodeModal from './NodeModal';
 
 export default function Chart({
@@ -49,6 +49,11 @@ export default function Chart({
     await removeNode(id);
   }, []);
 
+  const handleDeleteEdge = useCallback(async (edges: CompanyEdge[]) => {
+    const { id } = edges[0];
+    await removeEdge(id);
+  }, []);
+
   return (
     <ReactFlow
       nodes={nodes}
@@ -58,6 +63,7 @@ export default function Chart({
       onConnect={onConnect}
       onNodeDragStop={handleNodeDragStop}
       onNodesDelete={handleDeleteNode}
+      onEdgesDelete={handleDeleteEdge}
       fitView
       attributionPosition="top-right"
       nodeTypes={nodeTypes}
