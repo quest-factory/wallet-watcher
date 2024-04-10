@@ -15,6 +15,7 @@ export type Company = {
   label: Tables<'nodes'>['label'];
   siren: Tables<'nodes'>['siren'];
   address: Tables<'nodes'>['address'];
+  contractAddress: Tables<'nodes'>['contractAddress'];
 };
 export type CompanyNode = Node<Company>;
 

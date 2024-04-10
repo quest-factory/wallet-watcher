@@ -86,6 +86,7 @@ export type Database = {
       nodes: {
         Row: {
           address: string | null;
+          contractAddress: string | null;
           id: string;
           label: string;
           position: Json;
@@ -93,6 +94,7 @@ export type Database = {
         };
         Insert: {
           address?: string | null;
+          contractAddress?: string | null;
           id?: string;
           label?: string;
           position?: Json;
@@ -100,6 +102,7 @@ export type Database = {
         };
         Update: {
           address?: string | null;
+          contractAddress?: string | null;
           id?: string;
           label?: string;
           position?: Json;
