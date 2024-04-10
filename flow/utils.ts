@@ -5,7 +5,7 @@ import { XYPosition } from 'reactflow';
 export const formatNodes = (dbNodes: Tables<'nodes'>[]): CompanyNode[] =>
   dbNodes?.map(({ id, ...nodeData }) => {
     // @ts-ignore
-    const position: XYPosition = node.position || { x: 0, y: 0 };
+    const position: XYPosition = nodeData.position || { x: 0, y: 0 };
     return {
       type: 'custom',
       id: id.toString(),
