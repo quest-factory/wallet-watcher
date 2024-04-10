@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
-import { XYPosition } from 'reactflow';
 import { createClient } from '@/lib/supabase/server';
 import { CompanyEdge, CompanyNode } from './types';
+import { formatEdges, formatNodes } from './utils';
 
 export async function getNodes(): Promise<CompanyNode[]> {
   const supabase = createClient(cookies());
@@ -14,22 +14,7 @@ export async function getNodes(): Promise<CompanyNode[]> {
     console.error(error.message);
   }
 
-  const nodes =
-    data?.map(({ id, label, siren, address, ...node }) => {
-      // @ts-ignore
-      const position: XYPosition = node.position || { x: 0, y: 0 };
-      return {
-        ...node,
-        type: 'custom',
-        id: id.toString(),
-        position,
-        data: {
-          label,
-          siren,
-          address,
-        },
-      };
-    }) || [];
+  const nodes = formatNodes(data || []);
 
   return nodes;
 }
@@ -42,16 +27,7 @@ export async function getEdges(): Promise<CompanyEdge[]> {
     console.error(error.message);
   }
 
-  const edges =
-    data?.map(({ id, source, target, label }) => ({
-      type: 'custom',
-      id: id.toString(),
-      source,
-      target,
-      data: {
-        label,
-      },
-    })) || [];
+  const edges = formatEdges(data || []);
 
   return edges;
 }

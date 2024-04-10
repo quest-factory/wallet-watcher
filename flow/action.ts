@@ -3,46 +3,54 @@
 import { createClient } from '@/lib/supabase/server';
 import { Json, Tables } from '@/types_db';
 import { cookies } from 'next/headers';
-import { CompanyNode } from './types';
+import { Company, CompanyEdge, CompanyNode } from './types';
+import { formatEdges, formatNodes } from './utils';
 
-export async function handleSubmitNode(state: any, formData: FormData) {
+type NodeFormState = {
+  nodes: CompanyNode[];
+  edges: CompanyEdge[];
+};
+export async function handleSubmitNode(
+  prevState: NodeFormState,
+  formData: FormData
+) {
+  const state = { ...prevState };
   const label = formData.get('label')?.toString();
   const siren = formData.get('siren')?.toString() || null;
   const address = formData.get('address')?.toString() || null;
+  const contractAddress = formData.get('contract_address')?.toString() || null;
   const edge_label = formData.get('edge_label')?.toString();
   const source = formData.get('source')?.toString();
   const target = formData.get('target')?.toString();
 
-  if (label)
-    await createNode({
+  if (label) {
+    const nodes = await createNode({
       label,
       siren,
       address,
+      contractAddress,
     });
+    state.nodes = formatNodes(nodes || []);
+  }
 
-  if (source && target) await createEdge({ label: edge_label, source, target });
+  if (source && target) {
+    const edges = await createEdge({ label: edge_label, source, target });
+    state.edges = formatEdges(edges || []);
+  }
 
   return state;
 }
 
 // ############################################ CREATE
-export async function createNode({
-  label,
-  siren,
-  address,
-}: {
-  label: Tables<'nodes'>['label'];
-  siren: Tables<'nodes'>['siren'];
-  address: Tables<'nodes'>['address'];
-}) {
+export async function createNode(node: Company) {
   const supabase = createClient(cookies());
-  const { error } = await supabase
-    .from('nodes')
-    .insert({ label, siren, address });
+  const { data, error } = await supabase.from('nodes').insert(node).select();
 
   if (error) {
     console.error(error.message);
   }
+
+  return data;
 }
 
 export async function createEdge({
@@ -55,15 +63,20 @@ export async function createEdge({
   target: Tables<'edges'>['target'];
 }) {
   const supabase = createClient(cookies());
-  const { error } = await supabase.from('edges').insert({
-    label,
-    source,
-    target,
-  });
+  const { data, error } = await supabase
+    .from('edges')
+    .insert({
+      label,
+      source,
+      target,
+    })
+    .select();
 
   if (error) {
     console.error(error.message);
   }
+
+  return data;
 }
 
 // ############################################ REMOVE

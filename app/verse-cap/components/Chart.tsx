@@ -21,7 +21,7 @@ export default function Chart({
   initialNodes: CompanyNode[];
   initialEdges: CompanyEdge[];
 }) {
-  const [nodes, _, onNodesChange] = useNodesState(initialNodes);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect: OnConnect = useCallback(
@@ -70,7 +70,7 @@ export default function Chart({
       edgeTypes={edgeTypes}
     >
       <Controls>
-        <NodeModal nodes={nodes} />
+        <NodeModal nodes={nodes} setNodes={setNodes} setEdges={setEdges} />
       </Controls>
       <Background color="#aaa" gap={16} />
     </ReactFlow>
