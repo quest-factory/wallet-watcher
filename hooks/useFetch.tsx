@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
 
-export default function useFetch(url: string) {
+export default function useFetch<T>(url: string): {
+  data: T | null;
+  error: string | null;
+  loading: boolean;
+} {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     let didCancelFetch = false;
