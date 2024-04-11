@@ -79,6 +79,7 @@ const CustomEdgeLabel = memo(
         `/api/holder/${address}?contractAddress=${contractAddress}`
       );
     const percent = response && response.data?.percent;
+    const shouldHide = !label && !percent;
 
     return (
       <EdgeLabelRenderer>
@@ -88,7 +89,7 @@ const CustomEdgeLabel = memo(
               position: 'absolute',
               transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
             }}
-            className="bg-white rounded p-1 text-sm text-gray-600"
+            className={`${shouldHide ? 'hidden' : ''} bg-white rounded p-1 text-sm text-gray-600`}
           >
             {label}
             {percent && `${percent}%`}
