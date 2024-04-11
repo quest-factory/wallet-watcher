@@ -1,3 +1,4 @@
+import { HolderResponse } from '@/app/api/holder/[address]/route';
 import { Company } from '@/flow/types';
 import useFetch from '@/hooks/useFetch';
 import { memo, useMemo } from 'react';
@@ -22,6 +23,7 @@ export const CustomEdge = memo(
           targetX={props.targetX}
           targetY={props.targetY}
           targetPosition={props.targetPosition}
+          targetId={props.target}
           sourceId={props.source}
         />
       }
@@ -38,6 +40,7 @@ const CustomEdgeLabel = memo(
     targetX,
     targetY,
     targetPosition,
+    targetId,
     sourceId,
   }: {
     label?: string;
@@ -47,6 +50,7 @@ const CustomEdgeLabel = memo(
     targetX: EdgeProps['targetX'];
     targetY: EdgeProps['targetY'];
     targetPosition: EdgeProps['targetPosition'];
+    targetId: EdgeProps['target'];
     sourceId: EdgeProps['source'];
   }) => {
     const [_, labelX, labelY] = getSmoothStepPath({
@@ -58,16 +62,27 @@ const CustomEdgeLabel = memo(
       targetPosition,
     });
     const nodes = useNodes<Company>();
+    const target = useMemo(
+      () => nodes.find(({ id }) => id === targetId),
+      [targetId, nodes]
+    );
     const source = useMemo(
       () => nodes.find(({ id }) => id === sourceId),
-      [sourceId, nodes]
+      [targetId, nodes]
     );
     const address = source?.data?.address;
-    const { data, loading } = useFetch(`/api/balance/${address}`);
+    const contractAddress = target?.data?.contractAddress;
+    const response =
+      contractAddress &&
+      address &&
+      useFetch<HolderResponse>(
+        `/api/holder/${address}?contractAddress=${contractAddress}`
+      );
+    const percent = response && response.data?.percent;
 
     return (
       <EdgeLabelRenderer>
-        {!loading && (
+        {!false && (
           <div
             style={{
               position: 'absolute',
@@ -76,7 +91,7 @@ const CustomEdgeLabel = memo(
             className="bg-white rounded p-1 text-sm text-gray-600"
           >
             {label}
-            {data}
+            {percent && `${percent}%`}
           </div>
         )}
       </EdgeLabelRenderer>
